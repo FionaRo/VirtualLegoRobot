@@ -6,11 +6,11 @@ namespace VirtualLegoRobotConsole.ObjectsToDeserialised
     public struct ConfigurableMethodCall
     {
         [YAXSerializeAs("ConfigurableMethodTerminal")]
-        [YAXDontSerialize]
+        [YAXErrorIfMissed(YAXExceptionTypes.Ignore)]
         public List<ConfigurableMethodTerminal> ConfigurableMethodTerminalList { get; set; }
 
         [YAXSerializeAs("Terminal")]
-        [YAXDontSerialize]
+        [YAXErrorIfMissed(YAXExceptionTypes.Ignore)]
         public List<Terminal> TerminalList { get; set; }
 
     }

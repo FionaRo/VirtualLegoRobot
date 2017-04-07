@@ -4,6 +4,7 @@ namespace VirtualLegoRobotConsole.ObjectsToDeserialised
 {
     public struct StartBlock
     {
+        [YAXErrorIfMissed(YAXExceptionTypes.Ignore)]
         [YAXAttributeForClass]
         public string Id { get; set; }
 
