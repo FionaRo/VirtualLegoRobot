@@ -10,13 +10,6 @@ using System.Xml.Serialization;
 using VirtualLegoRobotConsole.ObjectsToDeserialised;
 using YAXLib;
 
-public class Warehouse
-{
-    public string Name { get; set; }
-    public string Address { get; set; }
-    public double Area { get; set; }
-}
-
 namespace VirtualLegoRobotConsole
 {
     class Program
@@ -25,18 +18,19 @@ namespace VirtualLegoRobotConsole
         {
             DeserialisedObjects DSRobject = new DeserialisedObjects();
             string path = "C:\\Users\\Рина\\Desktop\\example.xml";
-            //string textFile;
+            string textFile;
 
-            //using (StreamReader reader = new StreamReader(path))
-            //{
-            //    textFile = reader.ReadToEnd();
-            //    textFile = textFile.Replace("xmlns=\"http://www.ni.com/SourceModel.xsd\"", "");
-            //}
+            using (StreamReader reader = new StreamReader(path))
+            {
+                textFile = reader.ReadToEnd();
+                //textFile = textFile.Replace("xmlns=\"http://www.ni.com/SourceModel.xsd\"", "");
+                textFile = textFile.Replace("xmlns=", "notlink=");
+            }
 
-            //using (StreamWriter writer = new StreamWriter(path, false))
-            //{
-            //    writer.Write(textFile);
-            //}
+            using (StreamWriter writer = new StreamWriter(path, false))
+            {
+                writer.Write(textFile);
+            }
 
             //StreamReader read = new StreamReader(path);
 

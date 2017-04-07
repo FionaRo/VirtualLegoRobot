@@ -14,27 +14,27 @@ namespace VirtualLegoRobotConsole.ObjectsToDeserialised
         [YAXSerializeAs("StartBlock")] //Default start block (If it doesn't exist - program is nonworking) 
         public StartBlock StartBlock { get; set; }
 
-        [YAXErrorIfMissed(YAXExceptionTypes.Ignore)]
-        [YAXSerializeAs("Wire")] //Connections between blocks
+        //[YAXSerializeAs("Wire")] //Connections between blocks
+        [YAXCollection(YAXCollectionSerializationTypes.RecursiveWithNoContainingElement, EachElementName = "Wire")]
         public List<Wire> WireList { get; set; }
 
         [YAXErrorIfMissed(YAXExceptionTypes.Ignore)]
-        [YAXSerializeAs("ConfigurableMethodCall")] //Blocks of action
+        [YAXCollection(YAXCollectionSerializationTypes.RecursiveWithNoContainingElement, EachElementName = "ConfigurableMethodCall")]
         public List<ConfigurableMethodCall> ConfigurablemethodCallList { get; set; }
 
         [YAXErrorIfMissed(YAXExceptionTypes.Ignore)]
-        [YAXSerializeAs("ConfigurableWaitFors")] //Waiting blocks
+        [YAXCollection(YAXCollectionSerializationTypes.RecursiveWithNoContainingElement, EachElementName = "ConfigurableWaitFors")]
         public List<ConfigurableWaitFors> ConfigurableWaitForsList { get; set; }
 
         [YAXErrorIfMissed(YAXExceptionTypes.Ignore)]
-        [YAXSerializeAs("PairedConfigurableMethodCall")] //Data of switching
+        [YAXCollection(YAXCollectionSerializationTypes.RecursiveWithNoContainingElement, EachElementName = "PairedConfigurableMethodCall")]
         public List<PairedConfigurableMethodCall> PairedConfigurableMethodCallList { get; set; }
         [YAXErrorIfMissed(YAXExceptionTypes.Ignore)]
-        [YAXSerializeAs("ConfigurableFlatCaseStructure")] //Condition of switch
+        [YAXCollection(YAXCollectionSerializationTypes.RecursiveWithNoContainingElement, EachElementName = "ConfigurableFlatCaseStructure")]
         public List<ConfigurableFlatCaseStructure> ConfigurableFlatCaseStructureList { get; set; }
 
         [YAXErrorIfMissed(YAXExceptionTypes.Ignore)]
-        [YAXSerializeAs("ConfigurableWhileLoop")] //Loop
+        [YAXCollection(YAXCollectionSerializationTypes.RecursiveWithNoContainingElement, EachElementName = "ConfigurableWhileLoop")]
         public List<ConfigurableWhileLoop> ConfigurableWhileLoopList { get; set; }
     }
 }

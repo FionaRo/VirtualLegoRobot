@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using System.IO;
 using YAXLib;
 
@@ -15,24 +16,35 @@ namespace VirtualLegoRobotConsole.ObjectsToDeserialised
             //XmlSerializer serializer = new XmlSerializer(typeof(SourceFile));
             //FileStream fs = new FileStream(path, FileMode.Open);
             //XmlReader reader = XmlReader.Create(fs);
-            SourceFile sourceFile;
             //sourceFile = (SourceFile)serializer.Deserialize(reader);
             //fs.Close();
 
+            //Wire wi = new Wire();
+            //wi.Id = "1";
+            //List<Wire> w = new List<Wire>();
+            //w.Add(wi);
+            //wi.Id = "2";
+            //w.Add(wi);
+            //wi.Id = "3";
+            //w.Add(wi);
             //SourceFile sf = new SourceFile()
             //{
-            //    namespaceDSR = new Namespace()
+            //    Namespace = new Namespace()
             //    {
-            //        projectName = "Project",
+            //        ProjectName = "Project",
             //        VirtualInstrument = new VirtualInstrument()
             //        {
-            //            s = "False"
+            //            BlockDiagram = new BlockDiagram()
+            //            {
+            //                WireList = new List<Wire>(w)
+            //            }
             //        }
             //    }
             //};
 
             StreamReader reader = new StreamReader(path);
-            
+            SourceFile sourceFile;
+
             YAXSerializer serializer = new YAXSerializer(typeof(SourceFile));
             //string someString = serializer.Serialize(sf);
             try

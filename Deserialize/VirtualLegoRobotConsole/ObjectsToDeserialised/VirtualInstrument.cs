@@ -6,5 +6,6 @@ namespace VirtualLegoRobotConsole.ObjectsToDeserialised
     {
         [YAXSerializeAs("BlockDiagram")]
         public BlockDiagram BlockDiagram { get; set; }
+
     }
 }
