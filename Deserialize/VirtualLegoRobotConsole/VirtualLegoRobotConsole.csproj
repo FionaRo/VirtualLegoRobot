@@ -47,14 +47,17 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="ObjectsToDeserialised\BlockDiagram.cs" />
+    <Compile Include="ObjectsToDeserialised\BuiltInMethod.cs" />
+    <Compile Include="ObjectsToDeserialised\Case.cs" />
     <Compile Include="ObjectsToDeserialised\ConfigurableFlatCaseStructure.cs" />
     <Compile Include="ObjectsToDeserialised\ConfigurableMethodCall.cs" />
     <Compile Include="ObjectsToDeserialised\ConfigurableMethodTerminal.cs" />
-    <Compile Include="ObjectsToDeserialised\ConfigurableWaitFors.cs" />
+    <Compile Include="ObjectsToDeserialised\ConfigurableWaitFor.cs" />
     <Compile Include="ObjectsToDeserialised\ConfigurableWhileLoop.cs" />
     <Compile Include="ObjectsToDeserialised\DeserialisedObjects.cs" />
     <Compile Include="ObjectsToDeserialised\Namespace.cs" />
     <Compile Include="ObjectsToDeserialised\PairedConfigurableMethodCall.cs" />
+    <Compile Include="ObjectsToDeserialised\SequenceNode.cs" />
     <Compile Include="ObjectsToDeserialised\StartBlock.cs" />
     <Compile Include="ObjectsToDeserialised\Terminal.cs" />
     <Compile Include="ObjectsToDeserialised\VirtualInstrument.cs" />

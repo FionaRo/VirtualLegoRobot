@@ -6,7 +6,11 @@ namespace VirtualLegoRobotConsole.ObjectsToDeserialised
     {
         [YAXErrorIfMissed(YAXExceptionTypes.Ignore)]
         [YAXAttributeForClass]
-        public string Id { get; set; }
+        public string Id { get; set; } //????? TODO
+
+        [YAXErrorIfMissed(YAXExceptionTypes.Ignore)]
+        [YAXAttributeForClass]
+        public string ConfiguredValue { get; set; }
 
         public Terminal Terminal { get; set; }
     }

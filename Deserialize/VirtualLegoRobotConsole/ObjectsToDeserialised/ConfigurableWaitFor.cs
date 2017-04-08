@@ -3,9 +3,8 @@ using YAXLib;
 
 namespace VirtualLegoRobotConsole.ObjectsToDeserialised
 {
-    public struct PairedConfigurableMethodCall
+    public struct ConfigurableWaitFor
     {
-
         [YAXAttributeForClass]
         public string Id { get; set; }
 

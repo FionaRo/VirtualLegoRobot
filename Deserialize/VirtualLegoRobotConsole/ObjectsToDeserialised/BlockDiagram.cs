@@ -23,8 +23,8 @@ namespace VirtualLegoRobotConsole.ObjectsToDeserialised
         public List<ConfigurableMethodCall> ConfigurablemethodCallList { get; set; }
 
         [YAXErrorIfMissed(YAXExceptionTypes.Ignore)]
-        [YAXCollection(YAXCollectionSerializationTypes.RecursiveWithNoContainingElement, EachElementName = "ConfigurableWaitFors")]
-        public List<ConfigurableWaitFors> ConfigurableWaitForsList { get; set; }
+        [YAXCollection(YAXCollectionSerializationTypes.RecursiveWithNoContainingElement, EachElementName = "ConfigurableWaitFor")]
+        public List<ConfigurableWaitFor> ConfigurableWaitForList { get; set; }
 
         [YAXErrorIfMissed(YAXExceptionTypes.Ignore)]
         [YAXCollection(YAXCollectionSerializationTypes.RecursiveWithNoContainingElement, EachElementName = "PairedConfigurableMethodCall")]
