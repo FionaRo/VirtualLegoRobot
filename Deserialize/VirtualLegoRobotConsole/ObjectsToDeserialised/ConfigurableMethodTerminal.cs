@@ -2,16 +2,14 @@
 
 namespace VirtualLegoRobotConsole.ObjectsToDeserialised
 {
-    public struct ConfigurableMethodTerminal
+    public class ConfigurableMethodTerminal
     {
-        [YAXErrorIfMissed(YAXExceptionTypes.Ignore)]
+        [YAXSerializeAs("ConfiguredValue")]
         [YAXAttributeForClass]
-        public string Id { get; set; } //????? TODO
-
         [YAXErrorIfMissed(YAXExceptionTypes.Ignore)]
-        [YAXAttributeForClass]
         public string ConfiguredValue { get; set; }
 
+        [YAXSerializeAs("Terminal")]
         public Terminal Terminal { get; set; }
     }
 }

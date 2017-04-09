@@ -6,6 +6,5 @@ namespace VirtualLegoRobotConsole.ObjectsToDeserialised
     {
         [YAXSerializeAs("Namespace")]
         public Namespace Namespace { get; set; }
-       
     }
 }

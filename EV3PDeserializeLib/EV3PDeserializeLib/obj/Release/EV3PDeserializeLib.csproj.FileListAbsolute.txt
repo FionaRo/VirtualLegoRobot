@@ -3,3 +3,8 @@ C:\Users\Рина\Desktop\  \Курсовая 2 курс\EV3PDeserializeLib\EV
 C:\Users\Рина\Desktop\  \Курсовая 2 курс\EV3PDeserializeLib\EV3PDeserializeLib\obj\Release\EV3PDeserializeLib.dll
 C:\Users\Рина\Desktop\  \Курсовая 2 курс\EV3PDeserializeLib\EV3PDeserializeLib\obj\Release\EV3PDeserializeLib.pdb
 C:\Users\Рина\Desktop\  \Курсовая 2 курс\EV3PDeserializeLib\EV3PDeserializeLib\bin\Release\YAXLib.dll
+C:\Users\Рина\Desktop\  \Курсовая 2 курс\Git\VirtualLegoRobot\EV3PDeserializeLib\EV3PDeserializeLib\bin\Release\EV3PDeserializeLib.dll
+C:\Users\Рина\Desktop\  \Курсовая 2 курс\Git\VirtualLegoRobot\EV3PDeserializeLib\EV3PDeserializeLib\bin\Release\EV3PDeserializeLib.pdb
+C:\Users\Рина\Desktop\  \Курсовая 2 курс\Git\VirtualLegoRobot\EV3PDeserializeLib\EV3PDeserializeLib\bin\Release\YAXLib.dll
+C:\Users\Рина\Desktop\  \Курсовая 2 курс\Git\VirtualLegoRobot\EV3PDeserializeLib\EV3PDeserializeLib\obj\Release\EV3PDeserializeLib.dll
+C:\Users\Рина\Desktop\  \Курсовая 2 курс\Git\VirtualLegoRobot\EV3PDeserializeLib\EV3PDeserializeLib\obj\Release\EV3PDeserializeLib.pdb

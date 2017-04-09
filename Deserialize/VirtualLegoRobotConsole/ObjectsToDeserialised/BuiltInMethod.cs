@@ -7,13 +7,14 @@ using YAXLib;
 
 namespace VirtualLegoRobotConsole.ObjectsToDeserialised
 {
-    public struct BuiltInMethod
+    public class BuiltInMethod
     {
+        [YAXSerializeAs("CallType")]
         [YAXAttributeForClass]
         public string CallType { get; set; }
 
-       public ConfigurableMethodCall ConfigurableMethodCall { get; set; }
-
+        [YAXSerializeAs("ConfigurableMethodCall")]
+        public ConfigurableMethodCall ConfigurableMethodCall { get; set; }
 
     }
 }

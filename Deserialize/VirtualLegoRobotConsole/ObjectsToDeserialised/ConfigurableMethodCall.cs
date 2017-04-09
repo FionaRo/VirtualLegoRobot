@@ -3,12 +3,16 @@ using YAXLib;
 
 namespace VirtualLegoRobotConsole.ObjectsToDeserialised
 {
-    public struct ConfigurableMethodCall
+    public class ConfigurableMethodCall
     {
+        [YAXSerializeAs("Id")]
+        [YAXAttributeForClass]
+        public string Id { get; set; }
+
+        [YAXSerializeAs("Target")]
         [YAXAttributeForClass]
         public string Target { get; set; }
 
-        [YAXErrorIfMissed(YAXExceptionTypes.Ignore)]
         [YAXCollection(YAXCollectionSerializationTypes.RecursiveWithNoContainingElement, EachElementName = "ConfigurableMethodTerminal")]
         public List<ConfigurableMethodTerminal> ConfigurableMethodTerminalList { get; set; }
 

@@ -3,11 +3,13 @@ using YAXLib;
 
 namespace VirtualLegoRobotConsole.ObjectsToDeserialised
 {
-    public struct ConfigurableWaitFor
+    public class ConfigurableWaitFor
     {
+        [YAXSerializeAs("Id")]
         [YAXAttributeForClass]
         public string Id { get; set; }
 
+        [YAXSerializeAs("Target")]
         [YAXAttributeForClass]
         public string Target { get; set; }
 

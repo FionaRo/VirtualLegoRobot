@@ -2,9 +2,9 @@
 
 namespace VirtualLegoRobotConsole.ObjectsToDeserialised
 {
-    public struct Wire
+    public class Wire
     {
-        //[YAXErrorIfMissed(YAXExceptionTypes.Ignore)]
+        [YAXSerializeAs("Id")]
         [YAXAttributeForClass]
         public string Id { get; set; }
     }

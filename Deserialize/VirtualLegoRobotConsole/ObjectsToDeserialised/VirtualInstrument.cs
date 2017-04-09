@@ -2,7 +2,7 @@
 
 namespace VirtualLegoRobotConsole.ObjectsToDeserialised
 {
-    public struct VirtualInstrument
+    public class VirtualInstrument
     {
         [YAXSerializeAs("BlockDiagram")]
         public BlockDiagram BlockDiagram { get; set; }

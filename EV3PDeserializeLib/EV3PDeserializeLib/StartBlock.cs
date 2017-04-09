@@ -12,6 +12,6 @@ namespace EV3PDeserializeLib
         public ConfigurableMethodTerminal ConfigurableMethodTerminal { get; set; }
 
         [YAXSerializeAs("Terminal")]
-        Terminal Terminal { get; set; }
+        public Terminal Terminal { get; set; }
     }
 }

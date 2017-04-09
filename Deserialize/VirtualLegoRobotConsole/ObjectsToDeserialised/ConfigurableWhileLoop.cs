@@ -3,16 +3,23 @@ using YAXLib;
 
 namespace VirtualLegoRobotConsole.ObjectsToDeserialised
 {
-    public struct ConfigurableWhileLoop
+    public class ConfigurableWhileLoop
     {
+
+        [YAXSerializeAs("Id")]
+        [YAXAttributeForClass]
+        public string Id { get; set; }
+
+        [YAXSerializeAs("InterruptName")]
+        [YAXAttributeForClass]
+        public string InterruptName { get; set; }
 
         [YAXCollection(YAXCollectionSerializationTypes.RecursiveWithNoContainingElement, EachElementName = "Terminal")]
         public List<Terminal> TerminalList { get; set; }
 
         [YAXCollection(YAXCollectionSerializationTypes.RecursiveWithNoContainingElement, EachElementName = "ConfigurableWhileLoop.BuiltInMethod")]
         public List<BuiltInMethod> BuiltInMethod { get; set; }
-        
-        [YAXErrorIfMissed(YAXExceptionTypes.Ignore)]
+
         [YAXCollection(YAXCollectionSerializationTypes.RecursiveWithNoContainingElement, EachElementName = "ConfigurableMethodCall")]
         public List<ConfigurableMethodCall> ConfigurablemethodCallList { get; set; }
 

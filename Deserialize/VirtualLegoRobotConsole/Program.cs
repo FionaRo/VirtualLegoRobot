@@ -17,7 +17,7 @@ namespace VirtualLegoRobotConsole
         static void Main(string[] args)
         {
             DeserialisedObjects DSRobject = new DeserialisedObjects();
-            string path = "C:\\Users\\Рина\\Desktop\\example.xml";
+            string path = "C:\\Users\\Рина\\Desktop\\Program.ev3p";
             string textFile;
 
             using (StreamReader reader = new StreamReader(path))

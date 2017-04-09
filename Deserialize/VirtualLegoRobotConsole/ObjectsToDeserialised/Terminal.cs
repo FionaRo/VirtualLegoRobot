@@ -2,22 +2,24 @@
 
 namespace VirtualLegoRobotConsole.ObjectsToDeserialised
 {
-    public struct Terminal
+    public class Terminal
     {
-        [YAXErrorIfMissed(YAXExceptionTypes.Ignore)]
+        [YAXSerializeAs("Id")]
         [YAXAttributeForClass]
         public string Id { get; set; }
 
-        [YAXErrorIfMissed(YAXExceptionTypes.Ignore)]
-        [YAXAttributeForClass] //Direction of data
+        [YAXSerializeAs("Direction")]
+        [YAXAttributeForClass]
         public string Direction { get; set; }
 
-        [YAXErrorIfMissed(YAXExceptionTypes.Ignore)]
-        [YAXAttributeForClass] //Connection between 2 blocks
-        public string Wire { get; set; }
-
-        [YAXErrorIfMissed(YAXExceptionTypes.Ignore)]
+        [YAXSerializeAs("DataType")]
         [YAXAttributeForClass]
         public string DataType { get; set; }
+
+        [YAXSerializeAs("Wire")]
+        [YAXErrorIfMissed(YAXExceptionTypes.Ignore)]
+        [YAXAttributeForClass]
+        public string Wire { get; set; }
+
     }
 }

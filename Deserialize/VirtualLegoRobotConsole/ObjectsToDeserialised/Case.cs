@@ -3,17 +3,16 @@ using System.Collections.Generic;
 
 namespace VirtualLegoRobotConsole.ObjectsToDeserialised
 {
-    public struct Case
+    public class Case
     {
-        [YAXAttributeForClass]
-        public string Id { get; set; }
-
+        [YAXSerializeAs("Pattern")]
         [YAXAttributeForClass]
         public string Pattern { get; set; }
 
         [YAXCollection(YAXCollectionSerializationTypes.RecursiveWithNoContainingElement, EachElementName = "SequenceNode")]
         public List<SequenceNode> SequenceNodeList { get; set; }
 
+        [YAXSerializeAs("Wire")]
         public Wire Wire { get; set; }
     }
 }

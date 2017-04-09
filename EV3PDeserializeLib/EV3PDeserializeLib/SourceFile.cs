@@ -3,7 +3,7 @@ using YAXLib;
 
 namespace EV3PDeserializeLib
 {
-    class SourceFile
+    public class SourceFile
     {
         [YAXSerializeAs("Namespace")]
         public Namespace Namespace { get; set; }

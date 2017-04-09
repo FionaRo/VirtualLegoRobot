@@ -2,7 +2,7 @@
 
 namespace VirtualLegoRobotConsole.ObjectsToDeserialised
 {
-      public struct Namespace
+    public class Namespace
     {
         [YAXSerializeAs("Name")]
         [YAXAttributeForClass]
