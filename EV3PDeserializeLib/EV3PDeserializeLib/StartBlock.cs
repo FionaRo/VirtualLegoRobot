@@ -1,8 +1,9 @@
-﻿using YAXLib;
+﻿using System;
+using YAXLib;
 
 namespace EV3PDeserializeLib
 {
-    public struct StartBlock
+    public struct StartBlock : IBlock
     {
         [YAXSerializeAs("Id")]
         [YAXAttributeForClass]
@@ -13,5 +14,10 @@ namespace EV3PDeserializeLib
 
         [YAXSerializeAs("Terminal")]
         public Terminal Terminal { get; set; }
+
+        public string GetId()
+        {
+            return Id;
+        }
     }
 }

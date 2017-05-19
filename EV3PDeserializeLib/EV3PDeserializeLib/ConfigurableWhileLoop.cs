@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using YAXLib;
 
 namespace EV3PDeserializeLib
 {
-    public struct ConfigurableWhileLoop
+    public struct ConfigurableWhileLoop : IBlock
     {
 
         [YAXSerializeAs("Id")]
@@ -25,5 +26,10 @@ namespace EV3PDeserializeLib
 
         [YAXCollection(YAXCollectionSerializationTypes.RecursiveWithNoContainingElement, EachElementName = "Wire")]
         public List<Wire> WireList { get; set; }
+
+        public string GetId()
+        {
+            return Id;
+        }
     }
 }

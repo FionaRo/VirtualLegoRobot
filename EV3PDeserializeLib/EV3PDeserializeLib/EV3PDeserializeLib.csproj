@@ -11,6 +11,7 @@
     <AssemblyName>EV3PDeserializeLib</AssemblyName>
     <TargetFrameworkVersion>v4.5.2</TargetFrameworkVersion>
     <FileAlignment>512</FileAlignment>
+    <TargetFrameworkProfile />
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
     <DebugSymbols>true</DebugSymbols>
@@ -20,6 +21,7 @@
     <DefineConstants>DEBUG;TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
     <DebugType>pdbonly</DebugType>
@@ -28,16 +30,20 @@
     <DefineConstants>TRACE</DefineConstants>
     <ErrorReport>prompt</ErrorReport>
     <WarningLevel>4</WarningLevel>
+    <Prefer32Bit>false</Prefer32Bit>
   </PropertyGroup>
   <ItemGroup>
     <Reference Include="System" />
-    <Reference Include="Microsoft.CSharp" />
-    <Reference Include="YAXLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
-      <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\YAXLib.dll</HintPath>
+    <Reference Include="YAXLib">
+      <HintPath>..\..\..\..\YAXLib\YAXLib\bin\Debug\YAXLib.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Action\Distance.cs" />
+    <Compile Include="Action\Get.cs" />
+    <Compile Include="Action\Motor.cs" />
+    <Compile Include="Action\Set.cs" />
+    <Compile Include="IBaseAction.cs" />
     <Compile Include="BlockDiagram.cs" />
     <Compile Include="BuiltInMethod.cs" />
     <Compile Include="Case.cs" />
@@ -46,10 +52,12 @@
     <Compile Include="ConfigurableMethodTerminal.cs" />
     <Compile Include="ConfigurableWaitFor.cs" />
     <Compile Include="ConfigurableWhileLoop.cs" />
+    <Compile Include="IBlock.cs" />
     <Compile Include="Namespace.cs" />
     <Compile Include="PairedConfigurableMethodCall.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="SequenceNode.cs" />
+    <Compile Include="Action\SetAction.cs" />
     <Compile Include="SourceFile.cs" />
     <Compile Include="StartBlock.cs" />
     <Compile Include="Terminal.cs" />

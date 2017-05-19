@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using YAXLib;
 
 namespace EV3PDeserializeLib
 {
-    public struct ConfigurableFlatCaseStructure
+    public struct ConfigurableFlatCaseStructure : IBlock
     {
         [YAXSerializeAs("Id")]
         [YAXAttributeForClass]
@@ -19,5 +20,10 @@ namespace EV3PDeserializeLib
         [YAXSerializeAs("Terminal")]
         [YAXAttributeForClass]
         public Terminal Terminal { get; set; }
+
+        public string GetId()
+        {
+            return Id;
+        }
     }
 }

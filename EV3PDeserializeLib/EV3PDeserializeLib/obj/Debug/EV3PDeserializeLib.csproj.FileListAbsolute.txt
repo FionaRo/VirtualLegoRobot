@@ -8,3 +8,7 @@ C:\Users\Рина\Desktop\  \Курсовая 2 курс\Git\VirtualLegoRobot\
 C:\Users\Рина\Desktop\  \Курсовая 2 курс\Git\VirtualLegoRobot\EV3PDeserializeLib\EV3PDeserializeLib\obj\Debug\EV3PDeserializeLib.dll
 C:\Users\Рина\Desktop\  \Курсовая 2 курс\Git\VirtualLegoRobot\EV3PDeserializeLib\EV3PDeserializeLib\obj\Debug\EV3PDeserializeLib.pdb
 C:\Users\Рина\Desktop\  \Курсовая 2 курс\Git\VirtualLegoRobot\EV3PDeserializeLib\EV3PDeserializeLib\obj\Debug\EV3PDeserializeLib.csprojResolveAssemblyReference.cache
+C:\Users\Рина\Desktop\  \Курсовая 2 курс\Git\VirtualLegoRobot\EV3PDeserializeLib\EV3PDeserializeLib\bin\Debug\YAXLib.dll
+C:\Users\Рина\Documents\Unity\VirtualLegoRobot\Assets\Scripts\EV3PDeserializeLib.dll
+C:\Users\Рина\Documents\Unity\VirtualLegoRobot\Assets\Scripts\EV3PDeserializeLib.pdb
+C:\Users\Рина\Desktop\  \Курсовая 2 курс\Git\VirtualLegoRobot\EV3PDeserializeLib\EV3PDeserializeLib\bin\Debug\YAXLib.pdb

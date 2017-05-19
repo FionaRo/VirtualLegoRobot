@@ -1,9 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using YAXLib;
 
 namespace EV3PDeserializeLib
 {
-    public struct ConfigurableMethodCall
+    public struct ConfigurableMethodCall : IBlock, IBaseAction
     {
         [YAXSerializeAs("Id")]
         [YAXAttributeForClass]
@@ -19,5 +20,14 @@ namespace EV3PDeserializeLib
         [YAXCollection(YAXCollectionSerializationTypes.RecursiveWithNoContainingElement, EachElementName = "Terminal")]
         public List<Terminal> TerminalList { get; set; }
 
+        public string GetBlockName()
+        {
+            return Target;
+        }
+
+        public string GetId()
+        {
+            return Id;
+        }
     }
 }
