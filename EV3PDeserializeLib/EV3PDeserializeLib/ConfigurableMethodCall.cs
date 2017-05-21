@@ -1,33 +1,25 @@
 ﻿using System;
 using System.Collections.Generic;
 using YAXLib;
+using EV3PDeserializeLib.Interfaces;
 
 namespace EV3PDeserializeLib
 {
-    public struct ConfigurableMethodCall : IBlock, IBaseAction
+    public class ConfigurableMethodCall : IBlock
     {
-        [YAXSerializeAs("Id")]
-        [YAXAttributeForClass]
-        public string Id { get; set; }
+        //[YAXSerializeAs("Id")] //А надо ли?
+        //[YAXAttributeForClass]
+        //public string Id { get; set; }
 
-        [YAXSerializeAs("Target")]
+        [YAXSerializeAs("Target")] //Имя 
         [YAXAttributeForClass]
         public string Target { get; set; }
 
         [YAXCollection(YAXCollectionSerializationTypes.RecursiveWithNoContainingElement, EachElementName = "ConfigurableMethodTerminal")]
         public List<ConfigurableMethodTerminal> ConfigurableMethodTerminalList { get; set; }
 
-        [YAXCollection(YAXCollectionSerializationTypes.RecursiveWithNoContainingElement, EachElementName = "Terminal")]
+        [YAXCollection(YAXCollectionSerializationTypes.RecursiveWithNoContainingElement, EachElementName = "Terminal")] //Id для Wire
         public List<Terminal> TerminalList { get; set; }
 
-        public string GetBlockName()
-        {
-            return Target;
-        }
-
-        public string GetId()
-        {
-            return Id;
-        }
     }
 }

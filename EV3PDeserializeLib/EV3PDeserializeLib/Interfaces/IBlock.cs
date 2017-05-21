@@ -2,10 +2,10 @@
 using System.Collections.Generic;
 using System.Text;
 
-namespace EV3PDeserializeLib
+namespace EV3PDeserializeLib.Interfaces
 {
     public interface IBlock
     {
-        string GetId();
+
     }
 }

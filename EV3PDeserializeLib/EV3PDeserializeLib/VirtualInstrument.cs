@@ -2,7 +2,7 @@
 
 namespace EV3PDeserializeLib
 {
-    public struct VirtualInstrument
+    public class VirtualInstrument
     {
         [YAXSerializeAs("BlockDiagram")]
         public BlockDiagram BlockDiagram { get; set; }

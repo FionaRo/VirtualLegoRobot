@@ -2,7 +2,7 @@
 
 namespace EV3PDeserializeLib
 {
-      public struct Namespace
+      public class Namespace
     {
         [YAXSerializeAs("Name")]
         [YAXAttributeForClass]

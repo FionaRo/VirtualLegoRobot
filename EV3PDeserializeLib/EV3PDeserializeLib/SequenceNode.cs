@@ -2,7 +2,7 @@
 
 namespace EV3PDeserializeLib
 {
-    public struct SequenceNode
+    public class SequenceNode
     {
         [YAXSerializeAs("Id")]
         [YAXAttributeForClass]

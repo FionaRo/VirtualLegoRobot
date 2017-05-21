@@ -34,7 +34,7 @@
   <ItemGroup>
     <Reference Include="EV3PDeserializeLib, Version=1.0.0.0, Culture=neutral, processorArchitecture=MSIL">
       <SpecificVersion>False</SpecificVersion>
-      <HintPath>bin\Debug\EV3PDeserializeLib.dll</HintPath>
+      <HintPath>..\..\EV3PDeserializeLib\EV3PDeserializeLib\bin\Debug\EV3PDeserializeLib.dll</HintPath>
     </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />

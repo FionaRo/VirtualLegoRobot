@@ -2,7 +2,7 @@
 
 namespace EV3PDeserializeLib
 {
-    public struct BuiltInMethod
+    public class BuiltInMethod
     {
         [YAXSerializeAs("CallType")]
         [YAXAttributeForClass]

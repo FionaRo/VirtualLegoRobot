@@ -3,6 +3,7 @@ using System.IO;
 using System.IO.Compression;
 using EV3PDeserializeLib;
 using System.Collections.Generic;
+using EV3PDeserializeLib.Interfaces;
 
 namespace VirtualLegoRobotConsole
 {

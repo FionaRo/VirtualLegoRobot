@@ -2,7 +2,7 @@
 
 namespace EV3PDeserializeLib
 {
-    public struct ConfigurableMethodTerminal
+    public class ConfigurableMethodTerminal
     {
         [YAXSerializeAs("ConfiguredValue")]
         [YAXAttributeForClass]

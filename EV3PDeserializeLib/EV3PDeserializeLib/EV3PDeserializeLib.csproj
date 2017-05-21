@@ -39,11 +39,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Action\Distance.cs" />
-    <Compile Include="Action\Get.cs" />
-    <Compile Include="Action\Motor.cs" />
-    <Compile Include="Action\Set.cs" />
-    <Compile Include="IBaseAction.cs" />
+    <Compile Include="DeserializedProgram.cs" />
     <Compile Include="BlockDiagram.cs" />
     <Compile Include="BuiltInMethod.cs" />
     <Compile Include="Case.cs" />
@@ -52,17 +48,18 @@
     <Compile Include="ConfigurableMethodTerminal.cs" />
     <Compile Include="ConfigurableWaitFor.cs" />
     <Compile Include="ConfigurableWhileLoop.cs" />
-    <Compile Include="IBlock.cs" />
+    <Compile Include="Interfaces\IBlock.cs" />
     <Compile Include="Namespace.cs" />
     <Compile Include="PairedConfigurableMethodCall.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Interfaces\IRecursiveBlock.cs" />
     <Compile Include="SequenceNode.cs" />
-    <Compile Include="Action\SetAction.cs" />
     <Compile Include="SourceFile.cs" />
     <Compile Include="StartBlock.cs" />
     <Compile Include="Terminal.cs" />
     <Compile Include="VirtualInstrument.cs" />
     <Compile Include="Wire.cs" />
+    <Compile Include="Wrap.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

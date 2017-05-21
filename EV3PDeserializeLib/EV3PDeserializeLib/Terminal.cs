@@ -2,19 +2,19 @@
 
 namespace EV3PDeserializeLib
 {
-    public struct Terminal
+    public class Terminal
     {
         [YAXSerializeAs("Id")]
         [YAXAttributeForClass]
         public string Id { get; set; }
 
-        [YAXSerializeAs("Direction")]
+        [YAXSerializeAs("Direction")] //на будущее
         [YAXAttributeForClass] 
         public string Direction { get; set; }
 
-        [YAXSerializeAs("DataType")]
-        [YAXAttributeForClass]
-        public string DataType { get; set; }
+        //[YAXSerializeAs("DataType")] //???
+        //[YAXAttributeForClass]
+        //public string DataType { get; set; }
 
         [YAXSerializeAs("Wire")]
         [YAXErrorIfMissed(YAXExceptionTypes.Ignore)]

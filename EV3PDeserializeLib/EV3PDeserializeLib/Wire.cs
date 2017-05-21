@@ -2,7 +2,7 @@
 
 namespace EV3PDeserializeLib
 {
-    public struct Wire
+    public class Wire
     {
         [YAXSerializeAs("Id")]
         [YAXAttributeForClass]
