@@ -13,13 +13,11 @@
     <TargetFrameworkIdentifier>.NETFramework</TargetFrameworkIdentifier>
     <TargetFrameworkVersion>v3.5</TargetFrameworkVersion>
     <TargetFrameworkProfile>Unity Subset v3.5</TargetFrameworkProfile>
-    <CompilerResponseFile>
-    </CompilerResponseFile>
+    <CompilerResponseFile></CompilerResponseFile>
     <UnityProjectType>Game:1</UnityProjectType>
     <UnityBuildTarget>StandaloneWindows:5</UnityBuildTarget>
     <UnityVersion>5.6.1f1</UnityVersion>
-    <RootNamespace>
-    </RootNamespace>
+    <RootNamespace></RootNamespace>
     <LangVersion>4</LangVersion>
   </PropertyGroup>
   <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
@@ -54,53 +52,29 @@
     <Reference Include="UnityEngine">
       <HintPath>Library\UnityAssemblies\UnityEngine.dll</HintPath>
     </Reference>
-    <Reference Include="UnityEngine.UI">
-      <HintPath>Library\UnityAssemblies\UnityEngine.UI.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.Networking">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Networking.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.TestRunner">
-      <HintPath>Library\UnityAssemblies\UnityEngine.TestRunner.dll</HintPath>
-    </Reference>
-    <Reference Include="nunit.framework">
-      <HintPath>Library\UnityAssemblies\nunit.framework.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.Analytics">
-      <HintPath>Library\UnityAssemblies\UnityEngine.Analytics.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.HoloLens">
-      <HintPath>Library\UnityAssemblies\UnityEngine.HoloLens.dll</HintPath>
-    </Reference>
-    <Reference Include="UnityEngine.VR">
-      <HintPath>Library\UnityAssemblies\UnityEngine.VR.dll</HintPath>
-    </Reference>
     <Reference Include="UnityEditor">
       <HintPath>Library\UnityAssemblies\UnityEditor.dll</HintPath>
-    </Reference>
-    <Reference Include="Mono.Cecil">
-      <HintPath>Library\UnityAssemblies\Mono.Cecil.dll</HintPath>
-    </Reference>
-    <Reference Include="YAXLib">
-      <HintPath>Assets\Plugins\YAXLib.dll</HintPath>
     </Reference>
     <Reference Include="EV3PDeserializeLib">
       <HintPath>Assets\Plugins\EV3PDeserializeLib.dll</HintPath>
     </Reference>
+    <Reference Include="YAXLib">
+      <HintPath>Assets\Plugins\YAXLib.dll</HintPath>
+    </Reference>
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets\Scripts\ProgramScripts\Distance.cs" />
-    <Compile Include="Assets\Scripts\ProgramScripts\Get.cs" />
-    <Compile Include="Assets\Scripts\ProgramScripts\GetAction.cs" />
-    <Compile Include="Assets\Scripts\ProgramScripts\GlobalVariable.cs" />
+    <Compile Include="Assets\Scripts\Data\Distance.cs" />
+    <Compile Include="Assets\Scripts\Data\Get.cs" />
+    <Compile Include="Assets\Scripts\Data\GlobalVariable.cs" />
+    <Compile Include="Assets\Scripts\Data\Motor.cs" />
+    <Compile Include="Assets\Scripts\Data\SensorTypes.cs" />
+    <Compile Include="Assets\Scripts\Data\Set.cs" />
+    <Compile Include="Assets\Scripts\Data\UnitsTypes.cs" />
+    <Compile Include="Assets\Scripts\Data\VAriables.cs" />
+    <Compile Include="Assets\Scripts\ProgramScripts\Action.cs" />
     <Compile Include="Assets\Scripts\ProgramScripts\InternalProgramsNames.cs" />
-    <Compile Include="Assets\Scripts\ProgramScripts\Motor.cs" />
     <Compile Include="Assets\Scripts\ProgramScripts\RunProgram.cs" />
-    <Compile Include="Assets\Scripts\ProgramScripts\SensorTypes.cs" />
-    <Compile Include="Assets\Scripts\ProgramScripts\Set.cs" />
-    <Compile Include="Assets\Scripts\ProgramScripts\SetAction.cs" />
     <Compile Include="Assets\Scripts\ProgramScripts\Unarchiver.cs" />
-    <Compile Include="Assets\Scripts\ProgramScripts\UnitsTypes.cs" />
     <Compile Include="Assets\Scripts\UnityScripts\CameraMove.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
