@@ -1,8 +1,7 @@
 ﻿using System.Collections.Generic;
-using EV3PDeserializeLib.Interfaces;
 using YAXLib;
 
-namespace EV3PDeserializeLib
+namespace EV3PDeserializeLib.Interfaces
 {
     public interface IRecursiveBlock
     {

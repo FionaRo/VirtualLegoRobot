@@ -1,5 +1,4 @@
-﻿using System;
-using YAXLib;
+﻿using YAXLib;
 using EV3PDeserializeLib.Interfaces;
 
 namespace EV3PDeserializeLib

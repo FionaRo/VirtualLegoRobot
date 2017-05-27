@@ -4,14 +4,15 @@ namespace Assets.Scripts.Data
 {
     public class Set
     {
-        public Motor Motor1 { get; set; }
-        public Motor Motor2 { get; set; }
-        public Distance Distance { get; set; }
+        public SetTypes SetType;
 
-        public Set()
-        {
-            Motor1 = Motor2 = null;
-            Distance = null;
-        }
+        public Display Display;
+
+        public Indicator Indicator;
+
+        public Motor Motor1;
+        public Motor Motor2;
+        public Distance Distance;
+
     }
 }

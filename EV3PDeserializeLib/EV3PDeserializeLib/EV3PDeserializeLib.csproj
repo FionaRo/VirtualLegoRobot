@@ -47,6 +47,7 @@
     </Reference>
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="ConfigurableMegaAccessor.cs" />
     <Compile Include="DeserializedProgram.cs" />
     <Compile Include="BlockDiagram.cs" />
     <Compile Include="BuiltInMethod.cs" />

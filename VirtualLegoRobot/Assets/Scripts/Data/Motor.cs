@@ -4,10 +4,10 @@ namespace Assets.Scripts.Data
 {
     public class Motor
     {
-        public char Port { get; set; }
-        public int Power { get; set; }
+        public char Port { get; private set; }
+        public double Power { get; private set; }
 
-        public Motor(char port, int power)
+        public Motor(char port, double power)
         {
             Port = port;
             Power = power;

@@ -8,13 +8,13 @@ namespace EV3PDeserializeLib
         [YAXAttributeForClass]
         public string Id { get; set; }
 
-        [YAXSerializeAs("Direction")] //на будущее
+        [YAXSerializeAs("Direction")] 
         [YAXAttributeForClass] 
         public string Direction { get; set; }
 
-        //[YAXSerializeAs("DataType")] //???
-        //[YAXAttributeForClass]
-        //public string DataType { get; set; }
+        [YAXSerializeAs("DataType")]
+        [YAXAttributeForClass]
+        public string DataType { get; set; }
 
         [YAXSerializeAs("Wire")]
         [YAXErrorIfMissed(YAXExceptionTypes.Ignore)]

@@ -3,9 +3,9 @@ namespace Assets.Scripts.Data
 {
     public class Distance
     {
-        public double Value { get; set; }
-        UnitsTypes Unit { get; set; }
+        public double Value { get; private set; }
+        UnitTypes Unit { get; set; }
 
-        public Distance(double value, UnitsTypes unit) { Value = value; Unit = unit; }
+        public Distance(double value, UnitTypes unit) { Value = value; Unit = unit; }
     }
 }

@@ -12,6 +12,10 @@ namespace EV3PDeserializeLib
         [YAXAttributeForClass]
         public string Pattern { get; set; }
 
+        [YAXSerializeAs("Id")]
+        [YAXAttributeForClass]
+        public string Id { get; set; }
+
         [YAXCollection(YAXCollectionSerializationTypes.RecursiveWithNoContainingElement, EachElementName = "SequenceNode")]
         public List<SequenceNode> SequenceNodeList { get; set; }
 

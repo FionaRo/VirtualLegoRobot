@@ -1,6 +1,6 @@
 ﻿using System;
 using System.IO;
-using System.IO.Compression;
+using Ionic.Zip;
 
 namespace Assets.Scripts.ProgramScripts
 {
@@ -15,11 +15,10 @@ namespace Assets.Scripts.ProgramScripts
             {
                 Directory.Delete(extractPath, true);
             }
-
             try
             {
-                //TODO извлечение файлов из архива .NET 4.0
-                //ZipFile.ExtractToDirectory(filename, extractPath); 
+                ZipFile zip = ZipFile.Read(filename);
+                zip.ExtractAll(extractPath);
             }
             catch (Exception ex)
             {

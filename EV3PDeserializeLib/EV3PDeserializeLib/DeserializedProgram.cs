@@ -7,6 +7,6 @@ namespace EV3PDeserializeLib
     {
         public Dictionary<string, IBlock> WiresDictionary { get; set; }
         public Dictionary<string, ConfigurableFlatCaseStructure> Switch { get; set; }
-        public List<Wire> TurnRunning { get; set; }
+        public Queue<Wire> TurnRunning { get; set; }
     }
 }

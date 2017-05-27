@@ -1,7 +1,5 @@
-﻿using System.Collections.Generic;
-using System.IO;
+﻿using System.IO;
 using YAXLib;
-using EV3PDeserializeLib.Interfaces;
 
 namespace EV3PDeserializeLib
 {

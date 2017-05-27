@@ -1,6 +1,6 @@
 ﻿using System;
 using System.IO;
-using System.IO.Compression;
+using Ionic.Zip;
 
 namespace VirtualLegoRobotConsole
 {
@@ -18,12 +18,24 @@ namespace VirtualLegoRobotConsole
 
             try
             {
-                ZipFile.ExtractToDirectory(filename, extractPath);
+                // Specifying Console.Out here causes diagnostic msgs to be sent to the Console
+                // In a WinForms or WPF or Web app, you could specify nothing, or an alternate
+                // TextWriter to capture diagnostic messages.
+
+                var options = new ReadOptions { StatusMessageWriter = System.Console.Out };
+                using (ZipFile zip = ZipFile.Read(filename, options))
+                {
+                    // This call to ExtractAll() assumes:
+                    //   - none of the entries are password-protected.
+                    //   - want to extract all entries to current working directory
+                    //   - none of the files in the zip already exist in the directory;
+                    //     if they do, the method will throw.
+                    zip.ExtractAll(extractPath);
+                }
             }
-            catch (Exception ex)
+            catch (System.Exception ex1)
             {
-                Console.WriteLine(ex.Message);
-                return null;
+                System.Console.Error.WriteLine("exception: " + ex1);
             }
             return extractPath;
         }

@@ -7,5 +7,9 @@ namespace EV3PDeserializeLib
         [YAXSerializeAs("Id")]
         [YAXAttributeForClass]
         public string Id { get; set; }
+
+        [YAXSerializeAs("Joints")]
+        [YAXAttributeForClass]
+        public string Joints { get; set; }
     }
 }
