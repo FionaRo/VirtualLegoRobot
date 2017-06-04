@@ -4,17 +4,19 @@ using System;
 using System.Collections.Generic;
 using System.IO;
 using Assets.Scripts.Data;
+using UnityEngine;
 
 namespace Assets.Scripts.ProgramScripts
 {
-    public class RunProgram
+    public class RunProgram 
     {
-        Dictionary<string, DeserializedProgram> runningProgram;
+        public Dictionary<string, DeserializedProgram> RunningProgram;
+        public string ProgramName;
 
         public RunProgram(string path)
         {
             string extractPath = Unarchiver.EV3Extract(path);
-            runningProgram = new Dictionary<string, DeserializedProgram>();
+            RunningProgram = new Dictionary<string, DeserializedProgram>();
             if (extractPath != null)
             {
                 string[] programFiles = Directory.GetFiles(extractPath, "*.ev3p");
@@ -31,20 +33,23 @@ namespace Assets.Scripts.ProgramScripts
                     {
                         writer.Write(textFile);
                     }
-                    runningProgram[programName] = SourceFile.Deserialize(programName);
+                    string[] name = programName.Split('\\');
+                    RunningProgram[name[name.Length - 1]] = SourceFile.Deserialize(programName);
                 }
             }
             else
             {
+                throw new Exception("File cannot be opened");
                 //TODO вывод ошибки при распаковке файла
             }
         }
 
-        public void Start(string programName)
+        public void Start()
         {
-            Run(runningProgram[programName]);
+            Debug.Log(ProgramName);
+            Run(RunningProgram[ProgramName]);
         }
-
+        
         private void Run(DeserializedProgram program)
         {
             foreach (Wire wire in program.TurnRunning)
@@ -62,7 +67,7 @@ namespace Assets.Scripts.ProgramScripts
                     return;
             }
         }
-
+        
         void Process(IBlock block, ConfigurableFlatCaseStructure cases = null)
         {
             if (block is StartBlock)
@@ -120,6 +125,7 @@ namespace Assets.Scripts.ProgramScripts
 
         void ProccessMotor(ConfigurableMethodCall motorBlock)
         {
+            Debug.Log("Ok");
             string ports = null, unitDistance = null;
             double distance = 0, speed1 = 0, speed2 = 0, steering = 0;
             bool isMove = false;

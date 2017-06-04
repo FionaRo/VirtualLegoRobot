@@ -13,9 +13,10 @@ namespace VirtualLegoRobotConsole
         {
             Console.WriteLine("Введите путь к распаковывему файлу");
             string filename;
-            filename = Console.ReadLine();
-            string extractPath = Unarchiver.EV3Extract(filename);
+            //filename = Console.ReadLine();
+            //string extractPath = Unarchiver.EV3Extract(filename);
             List<DeserializedProgram> deserializedProgram = new List<DeserializedProgram>();
+            string extractPath = Console.ReadLine();
             if (extractPath != null)
             {
                 Console.WriteLine(true);

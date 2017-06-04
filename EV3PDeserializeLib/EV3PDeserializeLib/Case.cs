@@ -6,6 +6,7 @@ namespace EV3PDeserializeLib
 { 
     public class Case : IRecursiveBlock
     {
+        [YAXDontSerialize]
         public DeserializedProgram DeserializedProgram { get; set; }
 
         [YAXSerializeAs("Pattern")]

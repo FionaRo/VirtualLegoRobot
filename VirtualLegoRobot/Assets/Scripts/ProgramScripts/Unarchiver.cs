@@ -8,9 +8,12 @@ namespace Assets.Scripts.ProgramScripts
     {
         public static string EV3Extract(string filename)
         {
+            string userName = System.Security.Principal.WindowsIdentity.GetCurrent().Name;
+            userName = userName.Split('\\')[1];
+            filename = filename.Replace("/", "\\");
             string[] splitPath = filename.Split('\\');
-            string extractPath = "ExtractedFiles\\";
-            extractPath = extractPath.Insert(extractPath.Length, splitPath[splitPath.Length - 1]);
+            string extractPath = "C:\\Users\\" + userName + "\\Documents\\LegoVirtualRobot\\ExtractedFiles\\";
+            extractPath += splitPath[splitPath.Length - 1];
             if (Directory.Exists(extractPath))
             {
                 Directory.Delete(extractPath, true);

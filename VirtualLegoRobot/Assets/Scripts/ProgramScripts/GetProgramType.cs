@@ -6,6 +6,8 @@ namespace Assets.Scripts.ProgramScripts
     {
         public static BlockTypes GetBlockType(string blockName)
         {
+            if (InternalProgramNames.MotorsNames.Contains(blockName))
+                return BlockTypes.LargeMotor;
             //TODO возвращение типа блока
             return 0;
         }

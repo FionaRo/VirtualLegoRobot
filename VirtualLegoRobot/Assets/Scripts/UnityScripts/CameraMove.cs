@@ -1,4 +1,7 @@
 ﻿using UnityEngine;
+using UnityEngine.SceneManagement;
+using UnityEngine.UI;
+
 //TODO что здесь происходит? 
 
 [AddComponentMenu("Main Camera")]
@@ -13,8 +16,8 @@ public class CameraMove : MonoBehaviour
     public float yMinLimit = 0f;
     public float yMaxLimit = 80f;
 
-    public float distanceMin = 2.5f;
-    public float distanceMax = 15f;
+    public float distanceMin = 20f;
+    public float distanceMax = 1000f;
 
     private Rigidbody rigidbody;
 
@@ -24,6 +27,7 @@ public class CameraMove : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        
         Vector3 angles = transform.eulerAngles;
         x = angles.y;
         y = angles.x;
@@ -41,12 +45,12 @@ public class CameraMove : MonoBehaviour
     {
         if (target)
         {
-            if (Input.GetMouseButton(0))
+            if (Input.GetMouseButton(0) /*&& Input.GetKey(KeyCode.LeftAlt)*/)
             {
                 x += Input.GetAxis("Mouse X") * xSpeed * distance * 0.02f;
                 y -= Input.GetAxis("Mouse Y") * ySpeed * 0.02f;
             }
-            y = ClampAngle(y, yMinLimit, yMaxLimit);
+            //y = ClampAngle(y, yMinLimit, yMaxLimit);
 
             Quaternion rotation = Quaternion.Euler(y, x, 0);
 

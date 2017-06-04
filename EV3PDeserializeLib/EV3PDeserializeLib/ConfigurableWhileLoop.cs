@@ -6,6 +6,7 @@ namespace EV3PDeserializeLib
 {
     public class ConfigurableWhileLoop : IRecursiveBlock, IBlock
     {
+        [YAXDontSerialize]
         public DeserializedProgram DeserializedProgram { get; set; }
 
         //[YAXSerializeAs("Id")]

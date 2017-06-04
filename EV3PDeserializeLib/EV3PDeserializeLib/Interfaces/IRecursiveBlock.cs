@@ -27,6 +27,7 @@ namespace EV3PDeserializeLib.Interfaces
         [YAXCollection(YAXCollectionSerializationTypes.RecursiveWithNoContainingElement, EachElementName = "ConfigurableWhileLoop")]
          List<ConfigurableWhileLoop> ConfigurableWhileLoopList { get; set; }
 
+        [YAXDontSerialize]
         DeserializedProgram DeserializedProgram { get; set; }
 
     }

@@ -7,6 +7,7 @@ namespace EV3PDeserializeLib
 {
     public class BlockDiagram : IRecursiveBlock
     {
+        [YAXDontSerialize]
         public DeserializedProgram DeserializedProgram { get; set; }
 
         //Стартовый блок. Если элемент отсутствует - кидает предупреждение и не десериализует файл (нет смысла - программа не будет выполняться)

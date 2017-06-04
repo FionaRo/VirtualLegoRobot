@@ -81,11 +81,11 @@
     <Reference Include="EV3PDeserializeLib">
       <HintPath>Assets\Plugins\EV3PDeserializeLib.dll</HintPath>
     </Reference>
-    <Reference Include="YAXLib">
-      <HintPath>Assets\Plugins\YAXLib.dll</HintPath>
-    </Reference>
     <Reference Include="Ionic.Zip">
       <HintPath>Assets\Plugins\Ionic.Zip.dll</HintPath>
+    </Reference>
+    <Reference Include="YAXLib">
+      <HintPath>Assets\Plugins\YAXLib.dll</HintPath>
     </Reference>
   </ItemGroup>
   <ItemGroup>
@@ -100,24 +100,31 @@
     <Compile Include="Assets\Scripts\Data\GlobalVariables.cs" />
     <Compile Include="Assets\Scripts\Data\Indicator.cs" />
     <Compile Include="Assets\Scripts\Data\IndicatorColors.cs" />
+    <Compile Include="Assets\Scripts\Data\InternalProgramNames.cs" />
     <Compile Include="Assets\Scripts\Data\Motor.cs" />
-    <Compile Include="Assets\Scripts\Data\SetTypes.cs" />
-    <Compile Include="Assets\Scripts\ProgramScripts\GetProgramType.cs" />
-    <Compile Include="Assets\Scripts\ProgramScripts\SetMessage.cs" />
-    <Compile Include="Assets\Scripts\UnityScripts\SensorIndicators.cs" />
     <Compile Include="Assets\Scripts\Data\SensorTypes.cs" />
     <Compile Include="Assets\Scripts\Data\Set.cs" />
+    <Compile Include="Assets\Scripts\Data\SetTypes.cs" />
     <Compile Include="Assets\Scripts\Data\UnitTypes.cs" />
+    <Compile Include="Assets\Scripts\Data\VAriables.cs" />
     <Compile Include="Assets\Scripts\Data\Variable.cs" />
-    <Compile Include="Assets\Scripts\Data\Variables.cs" />
     <Compile Include="Assets\Scripts\ProgramScripts\Action.cs" />
-    <Compile Include="Assets\Scripts\Data\InternalProgramNames.cs" />
+    <Compile Include="Assets\Scripts\ProgramScripts\GetProgramType.cs" />
     <Compile Include="Assets\Scripts\ProgramScripts\RunProgram.cs" />
+    <Compile Include="Assets\Scripts\ProgramScripts\SetMessage.cs" />
     <Compile Include="Assets\Scripts\ProgramScripts\Unarchiver.cs" />
+    <Compile Include="Assets\Scripts\UnityScripts\ButtonProccess.cs" />
     <Compile Include="Assets\Scripts\UnityScripts\CameraMove.cs" />
-  </ItemGroup>
-  <ItemGroup>
-    <None Include="ClassDiagram1.cd" />
+    <Compile Include="Assets\Scripts\UnityScripts\CameraMove2.cs" />
+    <Compile Include="Assets\Scripts\UnityScripts\Moving.cs" />
+    <Compile Include="Assets\Scripts\UnityScripts\OpenFileDialog.cs" />
+    <Compile Include="Assets\Scripts\UnityScripts\RobotMove.cs" />
+    <Compile Include="Assets\Scripts\UnityScripts\RunThisProgram.cs" />
+    <Compile Include="Assets\Scripts\UnityScripts\SceneEditScripts\AddItemToField.cs" />
+    <Compile Include="Assets\Scripts\UnityScripts\SceneEditScripts\ItemEdit.cs" />
+    <Compile Include="Assets\Scripts\UnityScripts\SceneEditScripts\SensorEdit.cs" />
+    <Compile Include="Assets\Scripts\UnityScripts\SensorIndicators.cs" />
+    <Compile Include="Assets\Scripts\UnityScripts\SwitchTab.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

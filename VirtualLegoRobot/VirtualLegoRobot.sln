@@ -3,6 +3,8 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 2017
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "VirtualLegoRobot", "VirtualLegoRobot.csproj", "{F061AEE8-1E40-E6BD-F92C-4BD552D4ADD5}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EV3PDeserializeLib", "..\..\..\Desktop\  \Курсовая 2 курс\Git\VirtualLegoRobot\EV3PDeserializeLib\EV3PDeserializeLib\EV3PDeserializeLib.csproj", "{6464B5E0-750F-4AD2-AC8A-3977098B2D11}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -13,6 +15,10 @@ Global
 		{F061AEE8-1E40-E6BD-F92C-4BD552D4ADD5}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{F061AEE8-1E40-E6BD-F92C-4BD552D4ADD5}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{F061AEE8-1E40-E6BD-F92C-4BD552D4ADD5}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6464B5E0-750F-4AD2-AC8A-3977098B2D11}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6464B5E0-750F-4AD2-AC8A-3977098B2D11}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6464B5E0-750F-4AD2-AC8A-3977098B2D11}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6464B5E0-750F-4AD2-AC8A-3977098B2D11}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
