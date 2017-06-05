@@ -1,101 +1,63 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.Scripts.UnityScripts
 {
     public class CameraMove2 : MonoBehaviour
     {
 
-        public float speed = 5;
-     
-        public KeyCode left = KeyCode.A;
-        public KeyCode right = KeyCode.D;
-        public KeyCode up = KeyCode.W;
-        public KeyCode down = KeyCode.S;
-        public KeyCode rotCamA = KeyCode.Q;
-        public KeyCode rotCamB = KeyCode.E;
+        public float Speed = 5;
 
-        public Transform startPoint;
-        public int rotationX = 70;
-        public float maxHeight = 15;
-        public float minHeight = 5;
-        public int rotationLimit = 240;
+        public KeyCode Left = KeyCode.A;
+        public KeyCode Right = KeyCode.D;
+        public KeyCode Up = KeyCode.W;
+        public KeyCode Down = KeyCode.S;
+        public KeyCode RotCamLeft = KeyCode.E;
+        public KeyCode RotCamRight = KeyCode.Q;
+        public KeyCode RotCamDown = KeyCode.R;
+        public KeyCode RotCamUp = KeyCode.T;
 
-        private float camRotation;
-        private float height;
-        private float tmpHeight;
-        private float h, v;
-        private bool L, R, U, D;
+        public Transform StartPoint;
+        public int RotationX = 70;
+        public float MaxHeight = 100;
+        public float MinHeight = 5;
+
+        private float _camRotationY;
+        private float _camRotationX;
+        private float _height;
+        private float _tmpHeight;
+        private float _h, _v;
 
         void Start()
         {
-            height = (maxHeight + minHeight) / 2;
-            tmpHeight = height;
-            camRotation = rotationLimit / 2;
-            transform.position = new Vector3(startPoint.position.x, height, startPoint.position.z);
-        }
-
-        public void CursorTriggerEnter(string triggerName)
-        {
-            switch (triggerName)
-            {
-                case "L":
-                    L = true;
-                    break;
-                case "R":
-                    R = true;
-                    break;
-                case "U":
-                    U = true;
-                    break;
-                case "D":
-                    D = true;
-                    break;
-            }
-        }
-
-        public void CursorTriggerExit(string triggerName)
-        {
-            switch (triggerName)
-            {
-                case "L":
-                    L = false;
-                    break;
-                case "R":
-                    R = false;
-                    break;
-                case "U":
-                    U = false;
-                    break;
-                case "D":
-                    D = false;
-                    break;
-            }
+            _tmpHeight = _height;
+            transform.position = new Vector3(StartPoint.position.x, StartPoint.position.y, StartPoint.position.z);
         }
 
         void Update()
         {
-            if (Input.GetKey(left) || L) h = -1; else if (Input.GetKey(right) || R) h = 1; else h = 0;
-            if (Input.GetKey(down) || D) v = -1; else if (Input.GetKey(up) || U) v = 1; else v = 0;
+            if (Input.GetKey(Left)) _h = -1; else if (Input.GetKey(Right)) _h = 1; else _h = 0;
+            if (Input.GetKey(Down)) _v = -1; else if (Input.GetKey(Up)) _v = 1; else _v = 0;
 
-            if (Input.GetKey(rotCamB)) camRotation -= 3; else if (Input.GetKey(rotCamA)) camRotation += 3;
-            camRotation = Mathf.Clamp(camRotation, 0, rotationLimit);
+            if (Input.GetKey(RotCamRight)) _camRotationY -= 3; else if (Input.GetKey(RotCamLeft)) _camRotationY += 3;
+
+            if (Input.GetKey(RotCamDown)) _camRotationX -= 3; else if (Input.GetKey(RotCamUp)) _camRotationX += 3;
 
             if (Input.GetAxis("Mouse ScrollWheel") > 0)
             {
-                if (height < maxHeight) tmpHeight += 1;
+                if (_height < MaxHeight) _tmpHeight += 10;
             }
             if (Input.GetAxis("Mouse ScrollWheel") < 0)
             {
-                if (height > minHeight) tmpHeight -= 1;
+                if (_height > MinHeight) _tmpHeight -= 10;
             }
 
-            tmpHeight = Mathf.Clamp(tmpHeight, minHeight, maxHeight);
-            height = Mathf.Lerp(height, tmpHeight, 3 * Time.deltaTime);
+            _height = Mathf.Lerp(_height, _tmpHeight, 3 * Time.deltaTime);
 
-            Vector3 direction = new Vector3(h, v, 0);
-            transform.Translate(direction * speed /** Time.deltaTime*/);
-            transform.position = new Vector3(transform.position.x, height, transform.position.z);
-            transform.rotation = Quaternion.Euler(rotationX, camRotation, 0);
+            //Vector3 direction = new Vector3(_h, _v, 0);
+            //transform.Translate(direction * Speed * 3 * Time.deltaTime);
+            transform.position = new Vector3(transform.position.x + _h * Speed, _height, transform.position.z + _v * Speed);
+            transform.rotation = Quaternion.Euler(_camRotationX, _camRotationY, 0);
         }
     }
 }

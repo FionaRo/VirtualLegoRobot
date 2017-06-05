@@ -10,6 +10,9 @@ namespace Assets.Scripts.UnityScripts.SceneEditScripts
         public Transform Parent;
         public float Y;
 
+        public static int ChoosenId = 0;
+        public static int Count = 0;
+
         void Start()
         {
             Button btn = Button.GetComponent<Button>();
@@ -24,7 +27,7 @@ namespace Assets.Scripts.UnityScripts.SceneEditScripts
                 {
                     cam.enabled = false;
                 }
-            Instantiate(Prefab);
+            Instantiate(Prefab, Parent);
         }
     }
 }

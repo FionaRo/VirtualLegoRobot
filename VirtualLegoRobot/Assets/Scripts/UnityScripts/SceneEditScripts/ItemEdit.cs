@@ -27,6 +27,7 @@ namespace Assets.Scripts.UnityScripts.SceneEditScripts
         public KeyCode IncSize = KeyCode.Equals;
         public KeyCode DecSize = KeyCode.Minus;
 
+        private int _id;
         private float _x, _z;
         private float _rotationX;
         private float _rotationY;
@@ -34,6 +35,7 @@ namespace Assets.Scripts.UnityScripts.SceneEditScripts
 
         private void Start()
         {
+            _id = ++AddItemToField.Count;
             _material = new Material(Shader.Find("Specular"));
             GetComponentInChildren<MeshRenderer>().material = _material;
             _material.color = _setOfColors[_curColor];
@@ -46,11 +48,26 @@ namespace Assets.Scripts.UnityScripts.SceneEditScripts
         void OnMouseDown()
         {
             _choosen = !_choosen;
-            _material.color = _choosen ? _choosenColor + _setOfColors[_curColor] : _setOfColors[_curColor];
+            if (_choosen)
+            {
+                _material.color = _choosenColor + _setOfColors[_curColor];
+                AddItemToField.ChoosenId = _id;
+            }
+            else
+            {
+                _material.color = _setOfColors[_curColor];
+                AddItemToField.ChoosenId = 0;
+            }
+            
         }
 
         void Update()
         {
+            if (_choosen && AddItemToField.ChoosenId != _id)
+            {
+                _choosen = !_choosen;
+                _material.color = _setOfColors[_curColor];
+            }
             if (!_choosen) return;
             if (Input.GetKeyDown(Delete))
             {

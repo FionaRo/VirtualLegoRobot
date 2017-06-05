@@ -7,6 +7,6 @@ namespace Assets.Scripts.Data
 {
     public enum ButtonConditions
     {
-        Pressed, Realised, Click
+        Realised, Pressed, Click
     }
 }

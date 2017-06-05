@@ -1,5 +1,7 @@
 ﻿using System;
+using Assets.Scripts.Data;
 using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.Scripts.UnityScripts.SceneEditScripts
 {
@@ -21,8 +23,14 @@ namespace Assets.Scripts.UnityScripts.SceneEditScripts
         public KeyCode SwitchCode = KeyCode.LeftAlt;
         public KeyCode Up = KeyCode.KeypadPlus;
         public KeyCode Down = KeyCode.KeypadEnter;
+        public KeyCode One = KeyCode.Alpha1;
+        public KeyCode Two = KeyCode.Alpha2;
+        public KeyCode Three = KeyCode.Alpha3;
+        public KeyCode Four = KeyCode.Alpha4;
 
         private Transform _thisObject;
+        private SensorObject _sensorObject;
+
         private float _maxHeight = 100f;
         private float _minHeight;
         private float _x, _y;
@@ -31,13 +39,33 @@ namespace Assets.Scripts.UnityScripts.SceneEditScripts
         private float _rotationX;
         private float _rotationY;
         private float _rotationZ;
+        private int _port = 5;
+        private int _id;
 
         void Start()
         {
-
+            _id = ++AddItemToField.Count;
             _material = new Material(Shader.Find("Specular"));
             GetComponentInChildren<MeshRenderer>().material = _material;
             _thisObject = transform.parent;
+
+            _sensorObject = new SensorObject() { Sensor = _thisObject.gameObject };
+            switch (_thisObject.name)
+            {
+                case "ColorSensor(Clone)":
+                    _sensorObject.Type = SensorTypes.ColorSensor;
+                    break;
+                case "IRSensor(Clone)":
+                    _sensorObject.Type = SensorTypes.InfraredSensor;
+                    break;
+                case "TouchSensor(Clone)":
+                    _sensorObject.Type = SensorTypes.TouchSensor;
+                    break;
+                case "UltrasonicSensor(Clone)":
+                    _sensorObject.Type = SensorTypes.UltrasonicSensorCm;
+                    break;
+            }
+
             _material.color = _originColor;
             //_thisObject.position = new Vector3(100, _thisObject.position.y, 0);
             _minHeight = _thisObject.position.y;
@@ -49,18 +77,45 @@ namespace Assets.Scripts.UnityScripts.SceneEditScripts
         void OnMouseDown()
         {
             _choosen = !_choosen;
-            _material.color = _choosen ? _originColor + _choosenColor : _originColor;
-            Debug.Log("Choosen");
+            if (_choosen)
+            {
+                _material.color = _choosenColor + _originColor;
+                AddItemToField.ChoosenId = _id;
+            }
+            else
+            {
+                _material.color = _originColor;
+                AddItemToField.ChoosenId = 0;
+            }
         }
 
         void Update()
         {
+            if (SensorData.SensorPorts[_port - 1] != _sensorObject)
+                _port = 5;
+            if (_choosen && AddItemToField.ChoosenId != _id)
+            {
+                _choosen = !_choosen;
+                _material.color = _originColor;
+            }
             if (!_choosen) return;
             if (Input.GetKeyDown(Delete))
             {
                 Destroy(_thisObject.gameObject);
+                if (_port != 5)
+                {
+                    SensorData.SensorPorts[_port - 1] = null;
+                    GameObject.Find("SensorPorts").transform.GetChild(_port).GetComponent<Text>().text =
+                        _port.ToString() + ":";
+                }
+                AddItemToField.ChoosenId = 0;
                 return;
             }
+            if (Input.GetKeyDown(One)) ChangePort(1);
+            if (Input.GetKeyDown(Two)) ChangePort(2);
+            if (Input.GetKeyDown(Three)) ChangePort(3);
+            if (Input.GetKeyDown(Four)) ChangePort(4);
+
             if (!Input.GetKey(SwitchCode)) //перемещение
             {
                 if (Input.GetKey(Left)) _x = -1;
@@ -96,6 +151,37 @@ namespace Assets.Scripts.UnityScripts.SceneEditScripts
                     _rotationX -= SpeedRotate;
 
                 _thisObject.rotation = Quaternion.Euler(_rotationX, _rotationY, _rotationZ);
+            }
+        }
+
+        void ChangePort(int i)
+        {
+            if (i == _port) return;
+
+            Text text = GameObject.Find("SensorPorts").transform.GetChild(i).GetComponent<Text>();
+            if (_port != 5)
+            {
+                GameObject.Find("SensorPorts").transform.GetChild(_port).GetComponent<Text>().text =
+                    _port.ToString() + ":";
+                SensorData.SensorPorts[_port - 1] = null;
+            }
+            _port = i;
+            SensorData.SensorPorts[i - 1] = _sensorObject;
+            text.text = i.ToString() + ": ";
+            switch (_sensorObject.Type)
+            {
+                case SensorTypes.ColorSensor:
+                    text.text += "Датчик цвета";
+                    break;
+                case SensorTypes.InfraredSensor:
+                    text.text += "Инфракрасный датчик";
+                    break;
+                case SensorTypes.TouchSensor:
+                    text.text += "Датчик касания";
+                    break;
+                case SensorTypes.UltrasonicSensorCm:
+                    text.text += "Ультразвуковой датчик";
+                    break;
             }
         }
     }
