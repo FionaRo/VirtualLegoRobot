@@ -4,6 +4,6 @@ namespace Assets.Scripts.Data
 {
     public enum ComparasionTypes
     {
-        Equal, NotEqual, Bigger, BiggerOrEqual, Smaller, SmallerOrEqual
+        Bigger, Smaller, NotEqual, Equal, BiggerOrEqual, SmallerOrEqual
     }
 }

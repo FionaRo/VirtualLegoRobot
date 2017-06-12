@@ -12,6 +12,10 @@ namespace Assets.Scripts.UnityScripts.SceneEditScripts
 {
     public class Open : MonoBehaviour
     {
+        private readonly Color _enabled = Color.gray;
+        public Transform MotorLeft, MotorRight;
+        public Transform Sensors;
+
         void Start()
         {
             GetComponent<Button>().onClick.AddListener(TaskOnClick);
@@ -51,7 +55,14 @@ namespace Assets.Scripts.UnityScripts.SceneEditScripts
                         for (int i = 0; i < fields.Length - 1; i++) 
                             if (field.Name == (a[i, 0] as string))
                                 field.SetValue(null, a[i, 1]);
-                    
+                    for (int i = 0; i < 4; i++)
+                    {
+                        SensorData.MotorPorts[i] = null; //TODO понять где левый, а где правый мотор
+                    }
+                    for (int i = 0; i < 4; i++)
+                    {
+                        SensorData.SensorPorts[i] = null; //TODO вывод сообщений
+                    }
                 }
                 catch
                 {

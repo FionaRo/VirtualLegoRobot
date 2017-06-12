@@ -6,16 +6,16 @@ namespace Assets.Scripts.ProgramScripts
 {
     public class Action
     {
-        public static void NewSetMotor(string ports, double speed1, double speed2, double distance, string unitDistance)
+        public static void NewSetMotor(string ports, float? speed1, float? speed2, float? distance, string unitDistance)
         {
             GlobalVariables.ImportData = new Set
             {
-                Motor1 = new Motor(ports[2], speed1),
+                Motor1 = new Motor(ports[2], speed1.Value),
                 SetType = SetTypes.LargeMotor
             };
             if (ports.Length == 5) // 1.A+B
             {
-                GlobalVariables.ImportData.Motor2 = new Motor(ports[4], speed2);
+                GlobalVariables.ImportData.Motor2 = new Motor(ports[4], speed2.Value);
             }
             if (unitDistance == null) return;
 
@@ -34,7 +34,7 @@ namespace Assets.Scripts.ProgramScripts
                 default:
                     throw new Exception("Unexpected UnitType");
             }
-            GlobalVariables.ImportData.Distance = new Distance(distance, unitType);
+            GlobalVariables.ImportData.Distance = new Distance(distance.Value, unitType);
         }
 
         public static void NewSetIndicator(int color, bool impulse)
@@ -51,13 +51,13 @@ namespace Assets.Scripts.ProgramScripts
         }
 
         public static void NewSetDisplay(DisplayTypes displayType,
-         double x1, double y1,
-         double x2, double y2,
+         float x1, float y1,
+         float x2, float y2,
          bool clearScreen,
          string text,
          bool invert,
          int size,
-         double radius,
+         float radius,
          bool fill)
         {
             Display display = new Display
@@ -99,13 +99,13 @@ namespace Assets.Scripts.ProgramScripts
         }
 
         public static void NewGet(
-            Boolean isWait,
+            bool isWait,
             SensorTypes sensor,
             bool isComparasion,
             char port = '0',
             ComparasionTypes comparasion = ComparasionTypes.Equal,
-            double valueCompare = 0,
-            int[] arrayCompare = null, int[] buttons = null, int timer = 0,
+            Variable valueCompare = null,
+            Variable arrayCompare = null, Variable buttons = null, Variable timer = null,
             bool reset = false)
         {
             Get get = new Get()
@@ -120,7 +120,6 @@ namespace Assets.Scripts.ProgramScripts
                 Buttons = buttons,
                 Timer = timer,
                 CanContinue = false,
-                Reset = reset
             };
             GlobalVariables.ExportData.Push(get);
         }

@@ -1,28 +1,28 @@
 ﻿using System.Threading;
+using Assets.Scripts.Data;
 using UnityEngine;
 using UnityEngine.UI;
-using Assets.Scripts.Data;
 
-public class RunThisProgram : MonoBehaviour
+namespace Assets.Scripts.UnityScripts.TestScripts
 {
-    public Button Button;
-    public static Thread Thread = null;
-
-    void Start()
+    public class RunThisProgram : MonoBehaviour
     {
-        Button btn = Button.GetComponent<Button>();
-        btn.onClick.AddListener(TaskOnClick);
-    }
+        public static Thread Thread;
 
-    void TaskOnClick()
-    {
-        string programName = Button.GetComponentInChildren<Text>().text;
-        if (Thread != null)
+        void Start()
         {
-            Thread.Interrupt();
+            Button btn = GetComponent<Button>();
+            btn.onClick.AddListener(TaskOnClick);
         }
-        GlobalVariables.CurrentProgram.ProgramName = programName;
-        Thread = new Thread(GlobalVariables.CurrentProgram.Start);
-        Thread.Start();
+
+        void TaskOnClick()
+        {
+            string programName = GetComponentInChildren<Text>().text;
+            if (Thread != null)
+                Thread.Interrupt();
+            GlobalVariables.CurrentProgram.ProgramName = programName;
+            Thread = new Thread(GlobalVariables.CurrentProgram.Start);
+            Thread.Start();
+        }
     }
 }

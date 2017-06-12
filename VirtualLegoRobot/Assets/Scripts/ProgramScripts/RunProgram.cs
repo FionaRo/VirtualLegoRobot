@@ -8,7 +8,7 @@ using UnityEngine;
 
 namespace Assets.Scripts.ProgramScripts
 {
-    public class RunProgram 
+    public class RunProgram
     {
         public Dictionary<string, DeserializedProgram> RunningProgram;
         public string ProgramName;
@@ -49,7 +49,7 @@ namespace Assets.Scripts.ProgramScripts
             Debug.Log(ProgramName);
             Run(RunningProgram[ProgramName]);
         }
-        
+
         private void Run(DeserializedProgram program)
         {
             foreach (Wire wire in program.TurnRunning)
@@ -67,8 +67,8 @@ namespace Assets.Scripts.ProgramScripts
                     return;
             }
         }
-        
-        void Process(IBlock block, ConfigurableFlatCaseStructure cases = null)
+
+        private void Process(IBlock block, ConfigurableFlatCaseStructure cases = null)
         {
             if (block is StartBlock)
             {
@@ -127,7 +127,7 @@ namespace Assets.Scripts.ProgramScripts
         {
             Debug.Log("Ok");
             string ports = null, unitDistance = null;
-            double distance = 0, speed1 = 0, speed2 = 0, steering = 0;
+            float? distance = null, speed1 = null, speed2 = null, steering = null;
             bool isMove = false;
             foreach (var data in motorBlock.ConfigurableMethodTerminalList)
             {
@@ -142,16 +142,16 @@ namespace Assets.Scripts.ProgramScripts
                     case "Rotations":
                         unitDistance = data.Terminal.Id;
                         if (data.Terminal.Wire != null)
-                            distance = (double)Variable.WireToNeededType(data.Terminal.Wire, data.Terminal.DataType).Value;
+                            distance = (float)Variable.WireToNeededType(data.Terminal.Wire, data.Terminal.DataType).Value;
                         else
-                            distance = (double)Variable.StringToNeededType(data.ConfiguredValue, data.Terminal.DataType).Value;
+                            distance = (float)Variable.StringToNeededType(data.ConfiguredValue, data.Terminal.DataType).Value;
                         break;
                     case "Speed":
                     case "Speed\\ Left":
                         if (data.Terminal.Wire != null)
-                            speed1 = (double)Variable.WireToNeededType(data.Terminal.Wire, data.Terminal.DataType).Value;
+                            speed1 = (float)Variable.WireToNeededType(data.Terminal.Wire, data.Terminal.DataType).Value;
                         else
-                            speed1 = (double)Variable.StringToNeededType(data.ConfiguredValue, data.Terminal.DataType).Value;
+                            speed1 = (float)Variable.StringToNeededType(data.ConfiguredValue, data.Terminal.DataType).Value;
                         if (speed1 > 100)
                             speed1 = 100;
                         else if (speed1 < -100)
@@ -159,9 +159,9 @@ namespace Assets.Scripts.ProgramScripts
                         break;
                     case "Speed\\ Right":
                         if (data.Terminal.Wire != null)
-                            speed2 = (double)Variable.WireToNeededType(data.Terminal.Wire, data.Terminal.DataType).Value;
+                            speed2 = (float)Variable.WireToNeededType(data.Terminal.Wire, data.Terminal.DataType).Value;
                         else
-                            speed2 = (double)Variable.StringToNeededType(data.ConfiguredValue, data.Terminal.DataType).Value;
+                            speed2 = (float)Variable.StringToNeededType(data.ConfiguredValue, data.Terminal.DataType).Value;
                         if (speed2 > 100)
                             speed2 = 100;
                         else if (speed2 < -100)
@@ -169,9 +169,9 @@ namespace Assets.Scripts.ProgramScripts
                         break;
                     case "Steering":
                         if (data.Terminal.Wire != null)
-                            steering = (double)Variable.WireToNeededType(data.Terminal.Wire, data.Terminal.DataType).Value;
+                            steering = (float)Variable.WireToNeededType(data.Terminal.Wire, data.Terminal.DataType).Value;
                         else
-                            steering = (double)Variable.StringToNeededType(data.ConfiguredValue, data.Terminal.DataType).Value;
+                            steering = (float)Variable.StringToNeededType(data.ConfiguredValue, data.Terminal.DataType).Value;
                         if (steering > 100)
                             steering = 100;
                         else if (steering < -100)
@@ -179,12 +179,11 @@ namespace Assets.Scripts.ProgramScripts
                         isMove = true;
                         break;
                     default:
-                        break;
+                        throw new Exception("Error in proccessing motor");
                 }
             }
             if (isMove) // блок рулевого управления преобразовываем к блоку независимого
             {
-
                 if (steering >= 0)
                 {
                     speed2 = ((50 - steering) / 50) * speed1;
@@ -192,30 +191,32 @@ namespace Assets.Scripts.ProgramScripts
                 else
                 {
                     speed2 = speed1;
-                    speed1 = ((50 - Math.Abs(steering)) / 50) * speed2;
+                    speed1 = ((50 - Math.Abs(steering.Value)) / 50) * speed2;
                 }
             }
-            SetMessage.SetMessageMotor(ports, isMove, speed1, speed2, steering, distance, unitDistance);
+            SetMessage.SetMessageMotor(ports, isMove, speed1.Value, speed2.Value, steering.Value, distance.Value, unitDistance);
             Action.NewSetMotor(ports, speed1, speed2, distance, unitDistance);
 
             //нужен get если расстояние не 0
             if (unitDistance == null) return;
             char port;
-            port = Math.Abs(speed1) > Math.Abs(speed2) ? ports[2] : ports[4];
+            port = Math.Abs(speed1.Value) > Math.Abs(speed2.Value) ? ports[2] : ports[4];
+
+            Variable dist = new Variable() { Value = distance, ValueType = typeof(float) };
 
             switch (unitDistance)
             {
                 case "Seconds":
-                    Action.NewGet(true, SensorTypes.Timer, true, port, ComparasionTypes.BiggerOrEqual, distance);
+                    Action.NewGet(true, SensorTypes.Timer, true, port, ComparasionTypes.BiggerOrEqual, dist);
                     break;
                 case "Rotations":
-                    Action.NewGet(true, SensorTypes.LargeMotorRotations, true, port, ComparasionTypes.BiggerOrEqual, distance);
+                    Action.NewGet(true, SensorTypes.LargeMotorRotations, true, port, ComparasionTypes.BiggerOrEqual, dist);
                     break;
                 case "Degrees":
-                    Action.NewGet(true, SensorTypes.LargeMotorDegrees, true, port, ComparasionTypes.BiggerOrEqual, distance);
+                    Action.NewGet(true, SensorTypes.LargeMotorDegrees, true, port, ComparasionTypes.BiggerOrEqual, dist);
                     break;
                 default:
-                    break;
+                    throw new Exception("Unexpected unit distance");
             }
 
             //TODO сон и оповещение 
@@ -225,7 +226,7 @@ namespace Assets.Scripts.ProgramScripts
 
         void ProccessDisplay(ConfigurableMethodCall displayBlock)
         {
-            double x1 = 0, x2 = 0, y1 = 0, y2 = 0, radius = 0;
+            float x1 = 0, x2 = 0, y1 = 0, y2 = 0, radius = 0;
             bool clearScreen = true, invert = false, fill = false;
             string text = null;
             int size = 0;
@@ -249,17 +250,17 @@ namespace Assets.Scripts.ProgramScripts
                     case "X1":
                     case "Column":
                         if (data.Terminal.Wire != null)
-                            x1 = (double)Variable.WireToNeededType(data.Terminal.Wire, data.Terminal.DataType).Value;
+                            x1 = (float)Variable.WireToNeededType(data.Terminal.Wire, data.Terminal.DataType).Value;
                         else
-                            x1 = (double)Variable.StringToNeededType(data.ConfiguredValue, data.Terminal.DataType).Value;
+                            x1 = (float)Variable.StringToNeededType(data.ConfiguredValue, data.Terminal.DataType).Value;
                         break;
                     case "Y":
                     case "Y1":
                     case "Row":
                         if (data.Terminal.Wire != null)
-                            y1 = (double)Variable.WireToNeededType(data.Terminal.Wire, data.Terminal.DataType).Value;
+                            y1 = (float)Variable.WireToNeededType(data.Terminal.Wire, data.Terminal.DataType).Value;
                         else
-                            y1 = (double)Variable.StringToNeededType(data.ConfiguredValue, data.Terminal.DataType).Value;
+                            y1 = (float)Variable.StringToNeededType(data.ConfiguredValue, data.Terminal.DataType).Value;
                         break;
                     case "Invert\\ Color":
                         if (data.Terminal.Wire != null)
@@ -275,21 +276,21 @@ namespace Assets.Scripts.ProgramScripts
                         break;
                     case "X2":
                         if (data.Terminal.Wire != null)
-                            x2 = (double)Variable.WireToNeededType(data.Terminal.Wire, data.Terminal.DataType).Value;
+                            x2 = (float)Variable.WireToNeededType(data.Terminal.Wire, data.Terminal.DataType).Value;
                         else
-                            x2 = (double)Variable.StringToNeededType(data.ConfiguredValue, data.Terminal.DataType).Value;
+                            x2 = (float)Variable.StringToNeededType(data.ConfiguredValue, data.Terminal.DataType).Value;
                         break;
                     case "Y2":
                         if (data.Terminal.Wire != null)
-                            y2 = (double)Variable.WireToNeededType(data.Terminal.Wire, data.Terminal.DataType).Value;
+                            y2 = (float)Variable.WireToNeededType(data.Terminal.Wire, data.Terminal.DataType).Value;
                         else
-                            y2 = (double)Variable.StringToNeededType(data.ConfiguredValue, data.Terminal.DataType).Value;
+                            y2 = (float)Variable.StringToNeededType(data.ConfiguredValue, data.Terminal.DataType).Value;
                         break;
                     case "Radius":
                         if (data.Terminal.Wire != null)
-                            radius = (double)Variable.WireToNeededType(data.Terminal.Wire, data.Terminal.DataType).Value;
+                            radius = (float)Variable.WireToNeededType(data.Terminal.Wire, data.Terminal.DataType).Value;
                         else
-                            radius = (double)Variable.StringToNeededType(data.ConfiguredValue, data.Terminal.DataType).Value;
+                            radius = (float)Variable.StringToNeededType(data.ConfiguredValue, data.Terminal.DataType).Value;
                         break;
                     case "Fill":
                         if (data.Terminal.Wire != null)
@@ -338,9 +339,10 @@ namespace Assets.Scripts.ProgramScripts
             {
                 SensorTypes sensorType = GetProgramType.GetSensorType(waitBlock.Target);
                 string wireResult = null, port = null;
-                int comparasion = 2, timer = 0;
-                double valueCompare = 0;
-                int[] arrayCompare = null, buttons = null;
+                int comparasion = 2;
+                Variable timer = null;
+                Variable valueCompare = null;
+                Variable arrayCompare = null, buttons = null;
                 foreach (var data in waitBlock.ConfigurablemethodTerminalList)
                 {
                     switch (data.Terminal.Id)
@@ -351,15 +353,15 @@ namespace Assets.Scripts.ProgramScripts
                             break;
                         case "Buttons":
                             if (data.Terminal.Wire != null)
-                                buttons = (int[])Variable.WireToNeededType(data.Terminal.Wire, data.Terminal.DataType).Value;
+                                buttons = Variable.WireToNeededType(data.Terminal.Wire, data.Terminal.DataType);
                             else
-                                buttons = (int[])Variable.StringToNeededType(data.ConfiguredValue, data.Terminal.DataType).Value;
+                                buttons = Variable.StringToNeededType(data.ConfiguredValue, data.Terminal.DataType);
                             break;
                         case "Timer":
                             if (data.Terminal.Wire != null)
-                                timer = (int)Variable.WireToNeededType(data.Terminal.Wire, data.Terminal.DataType).Value;
+                                timer = Variable.WireToNeededType(data.Terminal.Wire, data.Terminal.DataType);
                             else
-                                timer = (int)Variable.StringToNeededType(data.ConfiguredValue, data.Terminal.DataType).Value;
+                                timer = Variable.StringToNeededType(data.ConfiguredValue, data.Terminal.DataType);
                             break;
                         case "Comparasion":
                             if (data.Terminal.Wire != null)
@@ -375,15 +377,15 @@ namespace Assets.Scripts.ProgramScripts
                         case "How\\ Long":
                         case "Pressed\\,\\ Released\\ or\\ Bumped":
                             if (data.Terminal.Wire != null)
-                                valueCompare = (double)Variable.WireToNeededType(data.Terminal.Wire, data.Terminal.DataType).Value;
+                                valueCompare = Variable.WireToNeededType(data.Terminal.Wire, data.Terminal.DataType);
                             else
-                                valueCompare = (double)Variable.StringToNeededType(data.ConfiguredValue, data.Terminal.DataType).Value;
+                                valueCompare = Variable.StringToNeededType(data.ConfiguredValue, data.Terminal.DataType);
                             break;
                         case "Set\\ of\\ colors":
                             if (data.Terminal.Wire != null)
-                                arrayCompare = (int[])Variable.WireToNeededType(data.Terminal.Wire, data.Terminal.DataType).Value;
+                                arrayCompare = Variable.WireToNeededType(data.Terminal.Wire, data.Terminal.DataType);
                             else
-                                arrayCompare = (int[])Variable.StringToNeededType(data.ConfiguredValue, data.Terminal.DataType).Value;
+                                arrayCompare = Variable.StringToNeededType(data.ConfiguredValue, data.Terminal.DataType);
                             break;
                         case "Value":
                         case "Degrees":
@@ -406,7 +408,7 @@ namespace Assets.Scripts.ProgramScripts
                 }
                 if (wireResult != null)
                 {
-                    double result = GlobalVariables.ExportData.Peek().ResultChange;
+                    float result = (float)GlobalVariables.ExportData.Peek().ResultChange.Value;
                     Variable variable = new Variable
                     {
                         Value = result,
@@ -420,17 +422,18 @@ namespace Assets.Scripts.ProgramScripts
             {
                 SensorTypes sensorType = GetProgramType.GetSensorType(waitBlock.Target);
                 string wireResult = null, port = null;
-                int comparasion = 1, timer = 0; ;
-                double amount = 0;
+                int comparasion = 1;
+                Variable timer = null; ;
+                Variable amount = null;
                 foreach (var data in waitBlock.ConfigurablemethodTerminalList)
                 {
                     switch (data.Terminal.Id)
                     {
                         case "Timer":
                             if (data.Terminal.Wire != null)
-                                timer = (int)Variable.WireToNeededType(data.Terminal.Wire, data.Terminal.DataType).Value;
+                                timer = Variable.WireToNeededType(data.Terminal.Wire, data.Terminal.DataType);
                             else
-                                timer = (int)Variable.StringToNeededType(data.ConfiguredValue, data.Terminal.DataType).Value;
+                                timer = Variable.StringToNeededType(data.ConfiguredValue, data.Terminal.DataType);
                             break;
                         case "MotorPort":
                         case "Port":
@@ -445,9 +448,9 @@ namespace Assets.Scripts.ProgramScripts
                         case "Amount":
                         case "Change":
                             if (data.Terminal.Wire != null)
-                                amount = (double)Variable.WireToNeededType(data.Terminal.Wire, data.Terminal.DataType).Value;
+                                amount = Variable.WireToNeededType(data.Terminal.Wire, data.Terminal.DataType);
                             else
-                                amount = (double)Variable.StringToNeededType(data.ConfiguredValue, data.Terminal.DataType).Value;
+                                amount = Variable.StringToNeededType(data.ConfiguredValue, data.Terminal.DataType);
                             break;
                         case "Degrees":
                         case "Rotations":
@@ -473,11 +476,11 @@ namespace Assets.Scripts.ProgramScripts
                 }
                 if (wireResult != null)
                 {
-                    double result = GlobalVariables.ExportData.Peek().ResultChange;
+                    float result = (float)GlobalVariables.ExportData.Peek().ResultChange.Value;
                     Variable variable = new Variable
                     {
                         Value = result,
-                        ValueType = typeof(int)
+                        ValueType = typeof(float)
                     };
                     Variables.ValueFromWires[wireResult] = variable;
                     GlobalVariables.ExportData.Pop();
@@ -619,7 +622,7 @@ namespace Assets.Scripts.ProgramScripts
                         Value = ++loopIndex,
                         ValueType = typeof(int)
                     };
-                Run((loopBlock).DeserializedProgram);
+                Run(loopBlock.DeserializedProgram);
                 if (Variables.Interrupt != null)
                 {
                     if (Variables.Interrupt == loopBlock.InterruptName)
@@ -728,7 +731,7 @@ namespace Assets.Scripts.ProgramScripts
             {
                 foreach (var caseElement in caseStructure.CaseList)
                 {
-                    if (GlobalVariables.ExportData.Peek().ResultCompare == bool.Parse(caseElement.Pattern))
+                    if ((bool)GlobalVariables.ExportData.Peek().ResultCompare.Value == bool.Parse(caseElement.Pattern))
                     {
                         Run(caseElement.DeserializedProgram);
                         return;
@@ -739,7 +742,7 @@ namespace Assets.Scripts.ProgramScripts
             {
                 foreach (var caseElement in caseStructure.CaseList)
                 {
-                    if (Math.Abs(GlobalVariables.ExportData.Peek().ResultChange - double.Parse(caseElement.Pattern)) < 1e-3)
+                    if (Math.Abs((float)GlobalVariables.ExportData.Peek().ResultChange.Value - float.Parse(caseElement.Pattern)) < 1e-3)
                     {
                         Run(caseElement.DeserializedProgram);
                         return;
@@ -789,7 +792,7 @@ namespace Assets.Scripts.ProgramScripts
             }
             if (sensorBlock.Target == "TimerReset\\.vix")
             {
-                int timer = 0;
+                Variable timer = null;
                 SetMessage.SetMessageSensor();
                 foreach (var data in sensorBlock.ConfigurableMethodTerminalList)
                 {
@@ -797,9 +800,9 @@ namespace Assets.Scripts.ProgramScripts
                     {
                         case "Timer":
                             if (data.Terminal.Wire != null)
-                                timer = (int)Variable.WireToNeededType(data.Terminal.Wire, data.Terminal.DataType).Value;
+                                timer = Variable.WireToNeededType(data.Terminal.Wire, data.Terminal.DataType);
                             else
-                                timer = (int)Variable.StringToNeededType(data.ConfiguredValue, data.Terminal.DataType).Value;
+                                timer = Variable.StringToNeededType(data.ConfiguredValue, data.Terminal.DataType);
                             break;
                     }
                 }
@@ -808,10 +811,11 @@ namespace Assets.Scripts.ProgramScripts
             }
             if (sensorBlock.Target.Contains("Compare"))
             {
-                string wireResultDouble = null, wireResultBool = null, port = null;
-                int timer = 0, comparasion = 0;
-                double valueCompare = 0;
-                int[] arrayCompare = null, buttons = null;
+                string wireResultfloat = null, wireResultBool = null, port = null;
+                Variable timer = null;
+                int comparasion = 0;
+                Variable valueCompare = null;
+                Variable arrayCompare = null, buttons = null;
                 foreach (var data in sensorBlock.ConfigurableMethodTerminalList)
                 {
                     switch (data.Terminal.Id)
@@ -822,15 +826,15 @@ namespace Assets.Scripts.ProgramScripts
                             break;
                         case "Buttons":
                             if (data.Terminal.Wire != null)
-                                buttons = (int[])Variable.WireToNeededType(data.Terminal.Wire, data.Terminal.DataType).Value;
+                                buttons = Variable.WireToNeededType(data.Terminal.Wire, data.Terminal.DataType);
                             else
-                                buttons = (int[])Variable.StringToNeededType(data.ConfiguredValue, data.Terminal.DataType).Value;
+                                buttons = Variable.StringToNeededType(data.ConfiguredValue, data.Terminal.DataType);
                             break;
                         case "Timer":
                             if (data.Terminal.Wire != null)
-                                timer = (int)Variable.WireToNeededType(data.Terminal.Wire, data.Terminal.DataType).Value;
+                                timer = Variable.WireToNeededType(data.Terminal.Wire, data.Terminal.DataType);
                             else
-                                timer = (int)Variable.StringToNeededType(data.ConfiguredValue, data.Terminal.DataType).Value;
+                                timer = Variable.StringToNeededType(data.ConfiguredValue, data.Terminal.DataType);
                             break;
                         case "Comparasion":
                             if (data.Terminal.Wire != null)
@@ -846,15 +850,15 @@ namespace Assets.Scripts.ProgramScripts
                         case "How\\ Long":
                         case "Pressed\\,\\ Released\\ or\\ Bumped":
                             if (data.Terminal.Wire != null)
-                                valueCompare = (double)Variable.WireToNeededType(data.Terminal.Wire, data.Terminal.DataType).Value;
+                                valueCompare = Variable.WireToNeededType(data.Terminal.Wire, data.Terminal.DataType);
                             else
-                                valueCompare = (double)Variable.StringToNeededType(data.ConfiguredValue, data.Terminal.DataType).Value;
+                                valueCompare = Variable.StringToNeededType(data.ConfiguredValue, data.Terminal.DataType);
                             break;
                         case "Set\\ of\\ colors":
                             if (data.Terminal.Wire != null)
-                                arrayCompare = (int[])Variable.WireToNeededType(data.Terminal.Wire, data.Terminal.DataType).Value;
+                                arrayCompare = Variable.WireToNeededType(data.Terminal.Wire, data.Terminal.DataType);
                             else
-                                arrayCompare = (int[])Variable.StringToNeededType(data.ConfiguredValue, data.Terminal.DataType).Value;
+                                arrayCompare = Variable.StringToNeededType(data.ConfiguredValue, data.Terminal.DataType);
                             break;
                         case "Value":
                         case "Degrees":
@@ -866,8 +870,9 @@ namespace Assets.Scripts.ProgramScripts
                         case "Distance":
                         case "DistanceInches":
                             if (data.Terminal.Wire != null)
-                                wireResultDouble = data.Terminal.Wire;
+                                wireResultfloat = data.Terminal.Wire;
                             break;
+                        case "State":
                         case "Result":
                             if (data.Terminal.Wire != null)
                                 wireResultBool = data.Terminal.Wire;
@@ -880,20 +885,20 @@ namespace Assets.Scripts.ProgramScripts
                 while (!GlobalVariables.ExportData.Peek().CanContinue)
                 {
                 }
-                if (wireResultDouble != null)
+                if (wireResultfloat != null)
                 {
-                    double result = GlobalVariables.ExportData.Peek().ResultChange;
+                    float result = (float)GlobalVariables.ExportData.Peek().ResultChange.Value;
                     Variable variable = new Variable
                     {
                         Value = result,
-                        ValueType = typeof(double)
+                        ValueType = typeof(float)
                     };
-                    Variables.ValueFromWires[wireResultDouble] = variable;
+                    Variables.ValueFromWires[wireResultfloat] = variable;
                     GlobalVariables.ExportData.Pop();
                 }
                 if (wireResultBool != null)
                 {
-                    bool result = GlobalVariables.ExportData.Peek().ResultCompare;
+                    bool result = (bool)GlobalVariables.ExportData.Peek().ResultCompare.Value;
                     Variable variable = new Variable
                     {
                         Value = result,
@@ -906,7 +911,7 @@ namespace Assets.Scripts.ProgramScripts
             else
             {
                 string wireResult = null, port = null;
-                int timer = 0;
+                Variable timer = null;
                 foreach (var data in sensorBlock.ConfigurableMethodTerminalList)
                 {
                     switch (data.Terminal.Id)
@@ -917,9 +922,9 @@ namespace Assets.Scripts.ProgramScripts
                             break;
                         case "Timer":
                             if (data.Terminal.Wire != null)
-                                timer = (int)Variable.WireToNeededType(data.Terminal.Wire, data.Terminal.DataType).Value;
+                                timer = Variable.WireToNeededType(data.Terminal.Wire, data.Terminal.DataType);
                             else
-                                timer = (int)Variable.StringToNeededType(data.ConfiguredValue, data.Terminal.DataType).Value;
+                                timer = Variable.StringToNeededType(data.ConfiguredValue, data.Terminal.DataType);
                             break;
                         case "Value":
                         case "Color":
@@ -943,11 +948,11 @@ namespace Assets.Scripts.ProgramScripts
                 }
                 if (wireResult != null)
                 {
-                    double result = GlobalVariables.ExportData.Peek().ResultChange;
+                    float result = (float)GlobalVariables.ExportData.Peek().ResultChange.Value;
                     Variable variable = new Variable
                     {
                         Value = result,
-                        ValueType = typeof(double)
+                        ValueType = typeof(float)
                     };
                     Variables.ValueFromWires[wireResult] = variable;
                     GlobalVariables.ExportData.Pop();
@@ -997,7 +1002,7 @@ namespace Assets.Scripts.ProgramScripts
                 return;
             }
 
-            Variable valueOut = null, changingValue = null, 
+            Variable valueOut = null, changingValue = null,
                 index = null, decimals = null, lBound = null,
                 uBound = null, percent = null;
             Variable basePower = null, exponent = null;
@@ -1084,7 +1089,10 @@ namespace Assets.Scripts.ProgramScripts
                         break;
                 }
             }
-            //TODO работа с данными
+            valueOut = Maths.MathOperation(dataBlock.Target, valueIn, changingValue, index, decimals, lBound, uBound, percent,
+                basePower, exponent);
+            if (wireResult != null)
+                Variables.ValueFromWires[wireResult] = valueOut;
         }
 
         void ProccessPersonalBlock(ConfigurableMethodCall personalBlock)

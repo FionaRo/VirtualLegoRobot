@@ -1,20 +1,23 @@
 ﻿using UnityEngine;
+using UnityEngine.UI;
 
 namespace Assets.Scripts.UnityScripts.TestScripts
 {
     public class ButtonProccess : MonoBehaviour
     {
-        private float distance = 1f;
-        public Camera BtnCamera;
-
-
-        void Update()
+        void Start()
         {
-            RaycastHit hit;
-            if (Physics.Raycast(BtnCamera.transform.position, BtnCamera.transform.forward, out hit, distance))
-            {
-                
-            }
         }
+
+        void OnEnable()
+        {
+            Debug.Log("Enabled");
+        }
+
+        void OnDisable()
+        {
+            Debug.Log("Disabled");
+        }
+
     }
 }

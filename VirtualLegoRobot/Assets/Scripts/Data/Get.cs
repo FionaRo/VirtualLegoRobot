@@ -4,21 +4,21 @@ namespace Assets.Scripts.Data
     public class Get
     {
         //set
-        public int[] Buttons;
-        public int Timer;
+        public Variable Buttons;
+        public Variable Timer;
         public char Port;
         public SensorTypes SensorType; //TODO проверка на соответствие типов
         public ComparasionTypes Comparasion;
         public bool IsComparsion;
-        public double ValueCompare;
-        public int[] ArrayCompare;
+        public Variable ValueCompare;
+        public Variable ArrayCompare;
         public bool IsWait;
-        public bool Reset;
+        
 
         //get
         public bool CanContinue;
-        public double ResultChange;
-        public bool ResultCompare;
+        public Variable ResultChange = new Variable() { ValueType = typeof(float) };
+        public Variable ResultCompare = new Variable() { ValueType = typeof(bool) };
 
     }
 }

@@ -27,7 +27,7 @@ namespace Assets.Scripts.Data
             switch (type)
             {
                 case "Single":
-                    transformValue.Value = double.Parse(value);
+                    transformValue.Value = float.Parse(value);
                     break;
                 case "Int32":
                     transformValue.Value = int.Parse(value);
@@ -40,11 +40,11 @@ namespace Assets.Scripts.Data
                     break;
                 case "Single[]":
                     value = value.Substring(1, value.Length - 2);
-                    string[] arrayStringForDouble = value.Split(',');
-                    double[] arrayDouble = new double[value.Length];
-                    for (int i = 0; i < arrayStringForDouble.Length; i++)
-                        arrayDouble[i] = double.Parse(arrayStringForDouble[i]);
-                    transformValue.Value = arrayDouble;
+                    string[] arrayStringForfloat = value.Split(',');
+                    float[] arrayfloat = new float[value.Length];
+                    for (int i = 0; i < arrayStringForfloat.Length; i++)
+                        arrayfloat[i] = float.Parse(arrayStringForfloat[i]);
+                    transformValue.Value = arrayfloat;
                     break;
                 case "Boolean[]":
                     value = value.Substring(1, value.Length - 2);

@@ -74,7 +74,7 @@ namespace Assets.Scripts.UnityScripts
                 switch (unitDistance)
                 {
                     case UnitTypes.Degrees:
-                        if (rpm / 60 * time * 360 >= GlobalVariables.ExportData.Peek().ValueCompare)
+                        if (rpm / 60 * time * 360 >= (float)GlobalVariables.ExportData.Peek().ValueCompare.Value)
                         {
                             Right.brakeTorque = 100;
                             Left.brakeTorque = 100;
@@ -83,7 +83,7 @@ namespace Assets.Scripts.UnityScripts
                         }
                         break;
                     case UnitTypes.Rotations:
-                        if (rpm / 60 * time >= GlobalVariables.ExportData.Peek().ValueCompare)
+                        if (rpm / 60 * time >= (float)GlobalVariables.ExportData.Peek().ValueCompare.Value)
                         {
                             Right.brakeTorque = 100;
                             Left.brakeTorque = 100;
@@ -92,7 +92,7 @@ namespace Assets.Scripts.UnityScripts
                         }
                         break;
                     case UnitTypes.Seconds:
-                        if (time >= GlobalVariables.ExportData.Peek().ValueCompare)
+                        if (time >= (float)GlobalVariables.ExportData.Peek().ValueCompare.Value)
                         {
                             Right.brakeTorque = 100;
                             Left.brakeTorque = 100;

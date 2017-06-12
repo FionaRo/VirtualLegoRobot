@@ -10,7 +10,7 @@ namespace Assets.Scripts.ProgramScripts
             GlobalVariables.Message = "Программа запущена";
         }
 
-        public static void SetMessageMotor(string ports, bool isMove, double speed1, double speed2, double steering, double distance,
+        public static void SetMessageMotor(string ports, bool isMove, float speed1, float speed2, float steering, float distance,
             string unitDistance)
         {
             string message;

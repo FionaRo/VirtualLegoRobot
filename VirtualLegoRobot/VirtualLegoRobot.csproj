@@ -118,7 +118,7 @@
     <Compile Include="Assets\Scripts\UnityScripts\CameraMove.cs" />
     <Compile Include="Assets\Scripts\UnityScripts\CameraMove2.cs" />
     <Compile Include="Assets\Scripts\UnityScripts\SceneEditScripts\CarEdit.cs" />
-    <Compile Include="Assets\Scripts\UnityScripts\SensorData.cs" />
+    <Compile Include="Assets\Scripts\Data\SensorData.cs" />
     <Compile Include="Assets\Scripts\UnityScripts\SceneEditScripts\AddItemToField.cs" />
     <Compile Include="Assets\Scripts\UnityScripts\SceneEditScripts\ChangeMotorPort.cs" />
     <Compile Include="Assets\Scripts\UnityScripts\SceneEditScripts\ItemEdit.cs" />
@@ -126,7 +126,7 @@
     <Compile Include="Assets\Scripts\UnityScripts\SceneEditScripts\Open.cs" />
     <Compile Include="Assets\Scripts\UnityScripts\SceneEditScripts\Save.cs" />
     <Compile Include="Assets\Scripts\UnityScripts\SceneEditScripts\SensorEdit.cs" />
-    <Compile Include="Assets\Scripts\UnityScripts\SensorObject.cs" />
+    <Compile Include="Assets\Scripts\Data\SensorObject.cs" />
     <Compile Include="Assets\Scripts\UnityScripts\SwitchTab.cs" />
     <Compile Include="Assets\Scripts\UnityScripts\TestScripts\ButtonProccess.cs" />
     <Compile Include="Assets\Scripts\UnityScripts\TestScripts\GetProccess.cs" />

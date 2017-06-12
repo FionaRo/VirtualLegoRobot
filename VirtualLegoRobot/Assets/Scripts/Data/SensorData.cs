@@ -1,8 +1,7 @@
 ﻿using System;
-using Assets.Scripts.Data;
 using UnityEngine;
 
-namespace Assets.Scripts.UnityScripts
+namespace Assets.Scripts.Data
 {
     [Serializable]
     public static class SensorData
@@ -10,7 +9,7 @@ namespace Assets.Scripts.UnityScripts
         public static GameObject Prefab;
         public static SensorObject[] SensorPorts = {null, null, null, null};
         public static SensorObject[] MotorPorts = {null, null, null, null};
-        public static double[] Timer = new double[9];
+        public static float[] Timer = new float[9];
         public static ButtonConditions[] Buttons = new ButtonConditions[5];
     }
 }
