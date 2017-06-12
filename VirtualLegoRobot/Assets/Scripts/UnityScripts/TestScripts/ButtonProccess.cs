@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Assets.Scripts.UnityScripts
+namespace Assets.Scripts.UnityScripts.TestScripts
 {
     public class ButtonProccess : MonoBehaviour
     {

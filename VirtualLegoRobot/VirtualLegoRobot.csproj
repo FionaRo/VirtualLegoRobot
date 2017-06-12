@@ -101,6 +101,7 @@
     <Compile Include="Assets\Scripts\Data\Indicator.cs" />
     <Compile Include="Assets\Scripts\Data\IndicatorColors.cs" />
     <Compile Include="Assets\Scripts\Data\InternalProgramNames.cs" />
+    <Compile Include="Assets\Scripts\ProgramScripts\Maths.cs" />
     <Compile Include="Assets\Scripts\Data\Motor.cs" />
     <Compile Include="Assets\Scripts\Data\SensorColors.cs" />
     <Compile Include="Assets\Scripts\Data\SensorTypes.cs" />
@@ -128,10 +129,12 @@
     <Compile Include="Assets\Scripts\UnityScripts\SensorObject.cs" />
     <Compile Include="Assets\Scripts\UnityScripts\SwitchTab.cs" />
     <Compile Include="Assets\Scripts\UnityScripts\TestScripts\ButtonProccess.cs" />
+    <Compile Include="Assets\Scripts\UnityScripts\TestScripts\GetProccess.cs" />
     <Compile Include="Assets\Scripts\UnityScripts\TestScripts\Moving.cs" />
     <Compile Include="Assets\Scripts\UnityScripts\TestScripts\OpenFileDialog.cs" />
     <Compile Include="Assets\Scripts\UnityScripts\TestScripts\RunThisProgram.cs" />
     <Compile Include="Assets\Scripts\UnityScripts\TestScripts\SensorProccess.cs" />
+    <Compile Include="Assets\Scripts\UnityScripts\TestScripts\SetProccess.cs" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
   <Target Name="GenerateTargetFrameworkMonikerAttribute" />

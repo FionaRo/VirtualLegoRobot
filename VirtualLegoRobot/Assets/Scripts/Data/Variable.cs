@@ -5,31 +5,38 @@ using System.Text;
 
 namespace Assets.Scripts.Data
 {
-    public struct Variable
+    public class Variable
     {
+        public static Dictionary<string, Type> VarTypes = new Dictionary<string, Type>()
+        {
+            {"Single", typeof(float)},
+            {"Int32", typeof(int)},
+            {"Boolean", typeof(bool)},
+            {"String", typeof(string)},
+            {"Single[]", typeof(float[])},
+            {"Boolean[]", typeof(bool[])}
+        };
+
         public object Value;
         public Type ValueType;
 
         public static Variable StringToNeededType(string value, string type)
         {
-            Variable transformValue = new Variable();
+            Variable transformValue = new Variable() {ValueType = VarTypes[type]};
+            
             switch (type)
             {
                 case "Single":
                     transformValue.Value = double.Parse(value);
-                    transformValue.ValueType = typeof(double);
                     break;
                 case "Int32":
                     transformValue.Value = int.Parse(value);
-                    transformValue.ValueType = typeof(int);
                     break;
                 case "Boolean":
                     transformValue.Value = bool.Parse(value);
-                    transformValue.ValueType = typeof(bool);
                     break;
                 case "String":
                     transformValue.Value = value;
-                    transformValue.ValueType = typeof(string);
                     break;
                 case "Single[]":
                     value = value.Substring(1, value.Length - 2);
@@ -38,7 +45,6 @@ namespace Assets.Scripts.Data
                     for (int i = 0; i < arrayStringForDouble.Length; i++)
                         arrayDouble[i] = double.Parse(arrayStringForDouble[i]);
                     transformValue.Value = arrayDouble;
-                    transformValue.ValueType = typeof(double[]);
                     break;
                 case "Boolean[]":
                     value = value.Substring(1, value.Length - 2);
@@ -47,7 +53,6 @@ namespace Assets.Scripts.Data
                     for (int i = 0; i < arrayStringForBool.Length; i++)
                         arrayBool[i] = bool.Parse(arrayStringForBool[i]);
                     transformValue.Value = arrayBool;
-                    transformValue.ValueType = typeof(bool[]);
                     break;
                 default:
                     throw new Exception("Unexpected type StringToNeededType");
@@ -57,7 +62,46 @@ namespace Assets.Scripts.Data
 
         public static Variable WireToNeededType(string wire, string type)
         {
-            return new Variable();
+            return Cast(Variables.ValueFromWires[wire], type);
         }
+
+        public static Variable Cast(Variable var, string type)
+        {
+            if (var.ValueType == VarTypes[type]) return var;
+            Variable newVar = new Variable() { ValueType = VarTypes[type] };
+            switch (type)
+            {
+                case "Single":
+                case "Int32":
+                    if (newVar.ValueType == VarTypes["Boolean"])
+                    {
+                        newVar.Value = ((bool)var.Value ? 1 : 0);
+                        return newVar;
+                    }
+                    return var;
+                case "String":
+                    newVar.Value = var.Value.ToString();
+                    return newVar;
+                case "Single[]":
+                    if (newVar.ValueType == VarTypes["Single"] || newVar.ValueType == VarTypes["Int32"])
+                    {
+                        float[] arr = { (float)var.Value };
+                        newVar.Value = arr;
+                        return newVar;
+                    }
+                    return var;
+                case "Boolean[]":
+                    if (newVar.ValueType == VarTypes["Boolean"])
+                    {
+                        bool[] arr = { (bool)var.Value };
+                        newVar.Value = arr;
+                        return newVar;
+                    }
+                    return var;
+                default:
+                    throw new Exception("Unexpected type StringToNeededType");
+            }
+        }
+
     }
 }

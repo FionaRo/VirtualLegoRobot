@@ -1,5 +1,4 @@
-﻿using UnityEngine;
-
+﻿
 namespace Assets.Scripts.Data
 {
     public enum SensorColors

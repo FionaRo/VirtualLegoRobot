@@ -637,7 +637,7 @@ namespace Assets.Scripts.ProgramScripts
         {
             string def = caseStructure.Id;
             Case defCase = null;
-            Variable? varCompare = null;
+            Variable varCompare = null;
             Type type = typeof(string);
             if (switchParam.Target == "CaseSelector_String\\.vix")
             {
@@ -656,7 +656,7 @@ namespace Assets.Scripts.ProgramScripts
                 {
                     if (caseElement.Id == def)
                         defCase = caseElement;
-                    if ((string)varCompare.Value.Value == caseElement.Pattern)
+                    if ((string)varCompare.Value == caseElement.Pattern)
                     {
                         Run(caseElement.DeserializedProgram);
                         return;
@@ -682,7 +682,7 @@ namespace Assets.Scripts.ProgramScripts
                 {
                     if (caseElement.Id == def)
                         defCase = caseElement;
-                    if ((bool)varCompare.Value.Value == bool.Parse(caseElement.Pattern))
+                    if ((bool)varCompare.Value == bool.Parse(caseElement.Pattern))
                     {
                         Run(caseElement.DeserializedProgram);
                         return;
@@ -708,7 +708,7 @@ namespace Assets.Scripts.ProgramScripts
                 {
                     if (caseElement.Id == def)
                         defCase = caseElement;
-                    if ((int)varCompare.Value.Value == int.Parse(caseElement.Pattern))
+                    if ((int)varCompare.Value == int.Parse(caseElement.Pattern))
                     {
                         Run(caseElement.DeserializedProgram);
                         return;
@@ -958,9 +958,7 @@ namespace Assets.Scripts.ProgramScripts
         void ProccessData(ConfigurableMethodCall dataBlock)
         {
             string name = null, wireResult = null;
-            int decimals = 0;
             List<Variable> valueIn = new List<Variable>();
-            Variable? basePower = null, exponent = null;
 
             if (dataBlock.Target.Contains("X3"))
             {
@@ -999,9 +997,11 @@ namespace Assets.Scripts.ProgramScripts
                 return;
             }
 
-            Variable? valueOut = null, changingValue = null;
-            int index = 0;
-            double lBound = 0, uBound = 0, percent = 0;
+            Variable valueOut = null, changingValue = null, 
+                index = null, decimals = null, lBound = null,
+                uBound = null, percent = null;
+            Variable basePower = null, exponent = null;
+
             foreach (var data in dataBlock.ConfigurableMethodTerminalList)
             {
                 switch (data.Terminal.Id)
@@ -1031,34 +1031,34 @@ namespace Assets.Scripts.ProgramScripts
                     case "Lower\\ Bound":
                     case "Lower":
                         if (data.Terminal.Wire != null)
-                            lBound = (int)Variable.WireToNeededType(data.Terminal.Wire, data.Terminal.DataType).Value;
+                            lBound = Variable.WireToNeededType(data.Terminal.Wire, data.Terminal.DataType);
                         else
-                            lBound = (int)Variable.StringToNeededType(data.ConfiguredValue, data.Terminal.DataType).Value;
+                            lBound = Variable.StringToNeededType(data.ConfiguredValue, data.Terminal.DataType);
                         break;
                     case "Upper\\ Bound":
                     case "Upper":
                         if (data.Terminal.Wire != null)
-                            uBound = (int)Variable.WireToNeededType(data.Terminal.Wire, data.Terminal.DataType).Value;
+                            uBound = Variable.WireToNeededType(data.Terminal.Wire, data.Terminal.DataType);
                         else
-                            uBound = (int)Variable.StringToNeededType(data.ConfiguredValue, data.Terminal.DataType).Value;
+                            uBound = Variable.StringToNeededType(data.ConfiguredValue, data.Terminal.DataType);
                         break;
                     case "Percent\\ True":
                         if (data.Terminal.Wire != null)
-                            percent = (int)Variable.WireToNeededType(data.Terminal.Wire, data.Terminal.DataType).Value;
+                            percent = Variable.WireToNeededType(data.Terminal.Wire, data.Terminal.DataType);
                         else
-                            percent = (int)Variable.StringToNeededType(data.ConfiguredValue, data.Terminal.DataType).Value;
+                            percent = Variable.StringToNeededType(data.ConfiguredValue, data.Terminal.DataType);
                         break;
                     case "Index":
                         if (data.Terminal.Wire != null)
-                            index = (int)Variable.WireToNeededType(data.Terminal.Wire, data.Terminal.DataType).Value;
+                            index = Variable.WireToNeededType(data.Terminal.Wire, data.Terminal.DataType);
                         else
-                            index = (int)Variable.StringToNeededType(data.ConfiguredValue, data.Terminal.DataType).Value;
+                            index = Variable.StringToNeededType(data.ConfiguredValue, data.Terminal.DataType);
                         break;
                     case "Number\\ of\\ Decimals":
                         if (data.Terminal.Wire != null)
-                            decimals = (int)Variable.WireToNeededType(data.Terminal.Wire, data.Terminal.DataType).Value;
+                            decimals = Variable.WireToNeededType(data.Terminal.Wire, data.Terminal.DataType);
                         else
-                            decimals = (int)Variable.StringToNeededType(data.ConfiguredValue, data.Terminal.DataType).Value;
+                            decimals = Variable.StringToNeededType(data.ConfiguredValue, data.Terminal.DataType);
                         break;
                     case "Base":
                         if (data.Terminal.Wire != null)

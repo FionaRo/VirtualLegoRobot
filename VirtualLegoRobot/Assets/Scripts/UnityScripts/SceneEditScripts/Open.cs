@@ -48,9 +48,10 @@ namespace Assets.Scripts.UnityScripts.SceneEditScripts
                     if (a == null || a.GetLength(0) != fields.Length - 1) throw new Exception();
 
                     foreach (FieldInfo field in fields)
-                        for (int i = 0; i < fields.Length - 1; i++) //I ran into problems that some fields are dropped,now everyone is compared to everyone, problem fixed
+                        for (int i = 0; i < fields.Length - 1; i++) 
                             if (field.Name == (a[i, 0] as string))
                                 field.SetValue(null, a[i, 1]);
+                    
                 }
                 catch
                 {
