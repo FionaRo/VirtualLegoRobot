@@ -30,5 +30,8 @@ namespace EV3PDeserializeLib.Interfaces
         [YAXDontSerialize]
         DeserializedProgram DeserializedProgram { get; set; }
 
+        [YAXCollection(YAXCollectionSerializationTypes.RecursiveWithNoContainingElement, EachElementName = "ConfigurableMegaAccessor")]
+        List<ConfigurableMegaAccessor> ConfigurableMegaAccessor { get; set; }
+
     }
 }

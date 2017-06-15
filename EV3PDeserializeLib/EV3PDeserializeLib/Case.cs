@@ -41,5 +41,8 @@ namespace EV3PDeserializeLib
         //Блок цикла
         [YAXCollection(YAXCollectionSerializationTypes.RecursiveWithNoContainingElement, EachElementName = "ConfigurableWhileLoop")]
         public List<ConfigurableWhileLoop> ConfigurableWhileLoopList { get; set; }
+
+        [YAXCollection(YAXCollectionSerializationTypes.RecursiveWithNoContainingElement, EachElementName = "ConfigurableMegaAccessor")]
+        public List<ConfigurableMegaAccessor> ConfigurableMegaAccessor { get; set; }
     }
 }

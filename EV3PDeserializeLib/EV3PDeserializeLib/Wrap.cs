@@ -10,6 +10,7 @@ namespace EV3PDeserializeLib
             Dictionary<string, IBlock> wiresDictionary = new Dictionary<string, IBlock>();
             Dictionary<string, ConfigurableFlatCaseStructure> switchs = new Dictionary<string, ConfigurableFlatCaseStructure>();
             Queue<Wire> turnRunningQueue = new Queue<Wire>();
+            Dictionary<string, ConfigurableMegaAccessor> personalData = new Dictionary<string, ConfigurableMegaAccessor>();
 
             if (recBlock.ConfigurableWaitForList != null)
             {
@@ -48,15 +49,14 @@ namespace EV3PDeserializeLib
                 }
             }
 
-            var diagram = recBlock as BlockDiagram;
-            if (diagram != null)
+            foreach (var wire in recBlock.WireList)
             {
-                var block = diagram.StartBlock;
-                if (block.Terminal.Wire != null)
+                if (wire.Joints.Contains("SequenceOut"))
                 {
-                    wiresDictionary.Add(block.Terminal.Wire, block);
+                    turnRunningQueue.Enqueue(wire);
                 }
             }
+
             if (recBlock.ConfigurableFlatCaseStructureList != null)
             {
                 foreach (var block in recBlock.ConfigurableFlatCaseStructureList)
@@ -69,18 +69,32 @@ namespace EV3PDeserializeLib
                 }
             }
 
-            foreach (var wire in recBlock.WireList)
+            if (recBlock.ConfigurableMegaAccessor != null)
             {
-                if (wire.Joints.Contains("SequenceOut"))
+                foreach (var block in recBlock.ConfigurableMegaAccessor)
                 {
-                    turnRunningQueue.Enqueue(wire);
+                   personalData.Add(block.AccessorType, block);
                 }
             }
+
+            var diagram = recBlock as BlockDiagram;
+            if (diagram != null)
+            {
+                var block = diagram.StartBlock;
+                if (block.Terminal.Wire != null)
+                {
+                    wiresDictionary.Add(block.Terminal.Wire, block);
+                }
+            }
+
+
+
             DeserializedProgram deserializedProgram = new DeserializedProgram()
             {
                 WiresDictionary = wiresDictionary,
                 TurnRunning = turnRunningQueue,
-                Switch = switchs
+                Switch = switchs,
+                PersonalData = personalData
             };
             return deserializedProgram;
         }

@@ -22,10 +22,7 @@ namespace EV3PDeserializeLib
                     sourceFile.Namespace.VirtualInstrument.BlockDiagram.DeserializedProgram = Wrap.WrapIntoStruct(sourceFile.Namespace.VirtualInstrument.BlockDiagram);
                     return sourceFile.Namespace.VirtualInstrument.BlockDiagram.DeserializedProgram;
                 }
-                else
-                {
-                    throw new IOException("Deserializing XML is failed");
-                }
+                throw new IOException("Deserializing XML is failed");
             }
             catch
             {
